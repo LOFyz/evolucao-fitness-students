@@ -16,12 +16,19 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "firebase": "^9.15.0",
     "gatsby": "^5.3.3",
+    "gatsby-plugin-firebase-v9.0": "^1.0.3",
+    "gatsby-plugin-google-gtag": "^5.4.0",
     "gatsby-plugin-image": "^3.4.0",
     "gatsby-plugin-manifest": "^5.4.0",
+    "gatsby-plugin-nprogress": "^5.4.0",
+    "gatsby-plugin-offline": "^6.4.0",
     "gatsby-plugin-sharp": "^5.4.0",
     "gatsby-plugin-sitemap": "^6.4.0",
+    "gatsby-source-contentful": "^8.4.0",
     "gatsby-source-filesystem": "^5.4.0",
+    "gatsby-source-sanity": "^7.6.1",
     "gatsby-transformer-sharp": "^5.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
