@@ -16,6 +16,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "dotenv": "^16.0.3",
     "firebase": "^9.15.0",
     "flowbite": "^1.6.1",
     "gatsby": "^5.3.3",
