@@ -1,16 +1,16 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "Start project",
-			"type": "shell",
-			"command": "source ~/.nvm/nvm.sh && nvm install --lts && nvm use --lts && npm i -g yarn && yarn && yarn start",
-			"presentation": {
-				"reveal": "always",
-				"panel": "new",
-				"group": "develop"
-			},
-			"problemMatcher": [],
-		}
-	]
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Start project",
+            "type": "shell",
+            "command": "source ~/.nvm/nvm.sh && nvm install lts/hydrogen && nvm use lts/hydrogen && npm i -g yarn && yarn && yarn start",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "group": "develop"
+            },
+            "problemMatcher": []
+        }
+    ]
 }
