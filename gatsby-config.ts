@@ -52,6 +52,7 @@ const config: GatsbyConfig = {
                 path: `${__dirname}/src/pages`,
             },
         },
+        "gatsby-plugin-postcss",
         "gatsby-plugin-offline",
     ],
 };
