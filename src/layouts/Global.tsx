@@ -18,11 +18,11 @@ const GlobalLayout: React.FC<GlobalLayoutProps> = ({ children }) => {
 
     //* render
     return (
-        <>
+        <div id="root">
             <script src="../../node_modules/flowbite/dist/flowbite.min.js"></script>
 
             {children}
-        </>
+        </div>
     );
 };
 
