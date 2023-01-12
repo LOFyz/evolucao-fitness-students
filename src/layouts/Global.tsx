@@ -1,11 +1,11 @@
 import "flowbite/dist/flowbite.min.js";
 import React from "react";
 
-interface GlobalProps {
+interface GlobalLayoutProps {
     children?: React.ReactNode;
 }
 
-const Global: React.FC<GlobalProps> = ({ children }) => {
+const GlobalLayout: React.FC<GlobalLayoutProps> = ({ children }) => {
     //* hooks
 
     //* states
@@ -26,4 +26,4 @@ const Global: React.FC<GlobalProps> = ({ children }) => {
     );
 };
 
-export default Global;
+export default GlobalLayout;
