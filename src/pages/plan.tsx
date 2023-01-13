@@ -32,7 +32,7 @@ const recurrences: Record<string, string> = {
     yearly: "Anual",
 };
 
-const Plan: React.FC<PageProps> = () => {
+const Plan: React.FC<PageProps> = (props) => {
     //* hooks
     const formik = useFormik({
         initialValues,
@@ -52,7 +52,7 @@ const Plan: React.FC<PageProps> = () => {
 
     //* render
     return (
-        <AuthLayout>
+        <AuthLayout pageProps={props}>
             <div className="flex flex-col md:relative w-96 p-5">
                 <button
                     type="submit"

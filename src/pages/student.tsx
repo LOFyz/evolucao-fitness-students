@@ -27,7 +27,7 @@ const validationSchema = Yup.object({
     plan: Yup.string().required("O plano do aluno é obrigatório"),
 });
 
-const Student: React.FC<PageProps> = () => {
+const Student: React.FC<PageProps> = (props) => {
     //* hooks
     const formik = useFormik({
         initialValues,
@@ -47,7 +47,7 @@ const Student: React.FC<PageProps> = () => {
 
     //* render
     return (
-        <AuthLayout>
+        <AuthLayout pageProps={props}>
             <div className="flex flex-col md:relative w-96 p-5">
                 <button
                     type="submit"

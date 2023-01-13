@@ -3,9 +3,9 @@ import * as React from "react";
 import SEO from "../components/SEO";
 import AuthLayout from "../layouts/Auth";
 
-const Login: React.FC<PageProps> = () => {
+const Login: React.FC<PageProps> = (props) => {
     return (
-        <AuthLayout>
+        <AuthLayout pageProps={props}>
             <form className="w-80 p-5">
                 <div className="relative z-0 w-full mb-6 group">
                     <input

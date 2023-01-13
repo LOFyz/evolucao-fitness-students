@@ -1,11 +1,13 @@
+import { PageProps } from "gatsby";
 import React from "react";
 import GlobalLayout from "./Global";
 
 interface AuthLayoutProps {
     children?: React.ReactNode;
+    pageProps: PageProps;
 }
 
-const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
+const AuthLayout: React.FC<AuthLayoutProps> = ({ children, pageProps }) => {
     //* hooks
 
     //* states
@@ -18,7 +20,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
 
     //* render
     return (
-        <GlobalLayout>
+        <GlobalLayout pageProps={pageProps}>
             <div className="w-full h-full flex items-center justify-center">
                 {children}
             </div>
