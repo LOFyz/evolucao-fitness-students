@@ -1,12 +1,47 @@
+import { useFormik } from "formik";
 import type { HeadFC, PageProps } from "gatsby";
-import * as React from "react";
+import React from "react";
+import { When } from "react-if";
+import * as Yup from "yup";
 import SEO from "../components/SEO";
 import AuthLayout from "../layouts/Auth";
 
+type iFormData = {
+    email: string;
+    password: string;
+    keepSignedIn: boolean;
+};
+
+const initialValues: iFormData = {
+    email: "",
+    password: "",
+    keepSignedIn: false,
+};
+
+const validationSchema = Yup.object({
+    email: Yup.string().required("O email é obrigatório"),
+    password: Yup.string().required("A senha é obrigatória"),
+    keepSignedIn: Yup.boolean(),
+});
+
 const Login: React.FC<PageProps> = (props) => {
+    //* hooks
+    const formik = useFormik({
+        initialValues,
+        validationSchema,
+        onSubmit: (values) => {
+            console.log(values);
+        },
+    });
+
+    //* render
     return (
         <AuthLayout pageProps={props}>
-            <form className="w-80 p-5">
+            <form
+                className="w-80 p-5"
+                noValidate
+                onSubmit={formik.handleSubmit}
+            >
                 <div className="relative z-0 w-full mb-6 group">
                     <input
                         type="email"
@@ -14,7 +49,8 @@ const Login: React.FC<PageProps> = (props) => {
                         id="email"
                         className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                         placeholder=" "
-                        required
+                        value={formik.values.email}
+                        onChange={formik.handleChange}
                     />
                     <label
                         htmlFor="email"
@@ -22,6 +58,14 @@ const Login: React.FC<PageProps> = (props) => {
                     >
                         Email address
                     </label>
+
+                    <When
+                        condition={formik.touched.email && formik.errors.email}
+                    >
+                        <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                            {formik.errors.email}
+                        </p>
+                    </When>
                 </div>
                 <div className="relative z-0 w-full mb-6 group">
                     <input
@@ -30,7 +74,8 @@ const Login: React.FC<PageProps> = (props) => {
                         id="password"
                         className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                         placeholder=" "
-                        required
+                        value={formik.values.password}
+                        onChange={formik.handleChange}
                     />
                     <label
                         htmlFor="password"
@@ -38,6 +83,15 @@ const Login: React.FC<PageProps> = (props) => {
                     >
                         Password
                     </label>
+                    <When
+                        condition={
+                            formik.touched.password && formik.errors.password
+                        }
+                    >
+                        <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                            {formik.errors.password}
+                        </p>
+                    </When>
                 </div>
                 <div className="flex items-start mb-6">
                     <div className="flex items-center h-5">
@@ -46,6 +100,8 @@ const Login: React.FC<PageProps> = (props) => {
                             type="checkbox"
                             value=""
                             className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+                            checked={formik.values.keepSignedIn}
+                            onChange={formik.handleChange}
                         />
                     </div>
                     <label
@@ -54,6 +110,16 @@ const Login: React.FC<PageProps> = (props) => {
                     >
                         Manter autenticado
                     </label>
+                    <When
+                        condition={
+                            formik.touched.keepSignedIn &&
+                            formik.errors.keepSignedIn
+                        }
+                    >
+                        <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                            {formik.errors.keepSignedIn}
+                        </p>
+                    </When>
                 </div>
                 <button
                     type="submit"
