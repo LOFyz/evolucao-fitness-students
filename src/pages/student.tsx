@@ -136,7 +136,7 @@ const Student: React.FC<PageProps> = (props) => {
                                 value={formik.values.plan}
                                 onChange={formik.handleChange}
                             >
-                                <option value="" disabled selected>
+                                <option value="" disabled>
                                     Selecione um plano
                                 </option>
                             </select>
