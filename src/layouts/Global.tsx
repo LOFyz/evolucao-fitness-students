@@ -3,10 +3,10 @@ import { PageProps } from "gatsby";
 import React from "react";
 import { AuthProvider } from "../contexts/AuthProvider";
 
-interface GlobalLayoutProps {
+type GlobalLayoutProps = {
     children?: React.ReactNode;
     pageProps: PageProps;
-}
+};
 
 const GlobalLayout: React.FC<GlobalLayoutProps> = ({ children, pageProps }) => {
     //* hooks
