@@ -1,11 +1,41 @@
 import { MdArrowBack } from "@react-icons/all-files/md/MdArrowBack";
+import { useFormik } from "formik";
 import { HeadFC, PageProps, navigate } from "gatsby";
 import React from "react";
+import * as Yup from "yup";
 import SEO from "../components/SEO";
 import AuthLayout from "../layouts/Auth";
 
+type iFormData = {
+    name: string;
+    cpf: string;
+    whatsapp: string;
+    plan: string;
+};
+
+const initialValues: iFormData = {
+    name: "",
+    cpf: "",
+    whatsapp: "",
+    plan: "",
+};
+
+const validationSchema = Yup.object({
+    name: Yup.string().required("O nome do aluno é obrigatório"),
+    cpf: Yup.string().required("O CPF do aluno é obrigatório"),
+    whatsapp: Yup.string().required("O WhatsApp do aluno é obrigatório"),
+    plan: Yup.string().required("O plano do aluno é obrigatório"),
+});
+
 const Student: React.FC<PageProps> = () => {
     //* hooks
+    const formik = useFormik({
+        initialValues,
+        validationSchema,
+        onSubmit: (values) => {
+            console.log(values);
+        },
+    });
 
     //* states
 
@@ -28,7 +58,7 @@ const Student: React.FC<PageProps> = () => {
                 </button>
                 <h1 className="mb-2 text-2xl">Cadastro de Aluno</h1>
                 <hr className="mb-4" />
-                <form>
+                <form noValidate onSubmit={formik.handleSubmit}>
                     <div className="relative z-0 w-full mb-6 group">
                         <input
                             type="text"
@@ -36,7 +66,8 @@ const Student: React.FC<PageProps> = () => {
                             id="name"
                             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                             placeholder=" "
-                            required
+                            value={formik.values.name}
+                            onChange={formik.handleChange}
                         />
                         <label
                             htmlFor="name"
@@ -44,15 +75,21 @@ const Student: React.FC<PageProps> = () => {
                         >
                             Nome do Aluno
                         </label>
+                        {formik.touched.name && formik.errors.name && (
+                            <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                {formik.errors.name}
+                            </p>
+                        )}
                     </div>
                     <div className="relative z-0 w-full mb-6 group">
                         <input
-                            type="number"
+                            type="text"
                             name="cpf"
                             id="cpf"
                             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                             placeholder=" "
-                            required
+                            value={formik.values.cpf}
+                            onChange={formik.handleChange}
                         />
                         <label
                             htmlFor="cpf"
@@ -60,6 +97,11 @@ const Student: React.FC<PageProps> = () => {
                         >
                             Cadastro de Pessoa Física - CPF
                         </label>
+                        {formik.touched.cpf && formik.errors.cpf && (
+                            <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                {formik.errors.cpf}
+                            </p>
+                        )}
                     </div>
                     <div className="grid md:grid-cols-2 md:gap-6">
                         <div className="relative z-0 w-full mb-6 group">
@@ -69,7 +111,8 @@ const Student: React.FC<PageProps> = () => {
                                 id="whatsapp"
                                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                 placeholder=" "
-                                required
+                                value={formik.values.whatsapp}
+                                onChange={formik.handleChange}
                             />
                             <label
                                 htmlFor="whatsapp"
@@ -77,6 +120,12 @@ const Student: React.FC<PageProps> = () => {
                             >
                                 WhatsApp
                             </label>
+                            {formik.touched.whatsapp &&
+                                formik.errors.whatsapp && (
+                                    <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                        {formik.errors.whatsapp}
+                                    </p>
+                                )}
                         </div>
                         <div className="relative z-0 w-full mb-6 group">
                             <select
@@ -84,7 +133,8 @@ const Student: React.FC<PageProps> = () => {
                                 id="plan"
                                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                 placeholder=" "
-                                required
+                                value={formik.values.plan}
+                                onChange={formik.handleChange}
                             >
                                 <option value="" disabled selected>
                                     Selecione um plano
@@ -96,6 +146,11 @@ const Student: React.FC<PageProps> = () => {
                             >
                                 Plano
                             </label>
+                            {formik.touched.plan && formik.errors.plan && (
+                                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                    {formik.errors.plan}
+                                </p>
+                            )}
                         </div>
                     </div>
                     <button
