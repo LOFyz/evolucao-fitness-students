@@ -62,7 +62,11 @@ const TableLayout: React.FC<TableLayoutProps> = ({
         <GlobalLayout pageProps={pageProps}>
             <div className="w-full h-full flex mx-auto flex-col p-8 gap-6">
                 <div className="flex flex-wrap justify-center md:justify-between gap-6">
-                    <div className="flex flex-col gap-6 w-full md:w-80">
+                    <div
+                        className={`flex flex-col gap-6 w-full${
+                            showSearch ? " md:w-80" : "md:w-fit"
+                        }`}
+                    >
                         <div className="flex gap-4 items-center justify-between">
                             <h1 className="text-6xl font-bold">{title}</h1>
                             <When condition={showAdd}>
