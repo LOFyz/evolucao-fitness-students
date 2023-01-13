@@ -2,6 +2,7 @@ import { MdArrowBack } from "@react-icons/all-files/md/MdArrowBack";
 import { useFormik } from "formik";
 import { HeadFC, PageProps, navigate } from "gatsby";
 import React from "react";
+import * as Yup from "yup";
 import SEO from "../components/SEO";
 import AuthLayout from "../layouts/Auth";
 
@@ -17,6 +18,14 @@ const initialValues: iFormData = {
     recurrence: "",
 };
 
+const validationSchema = Yup.object({
+    name: Yup.string().required("O nome do plano é obrigatório"),
+    value: Yup.number().required("O valor do plano é obrigatório"),
+    recurrence: Yup.string().required(
+        "O tipo de recorrência do plano é obrigatório"
+    ),
+});
+
 const recurrences: Record<string, string> = {
     monthly: "Mensal",
     quarterly: "Trimestral",
@@ -27,6 +36,7 @@ const Plan: React.FC<PageProps> = () => {
     //* hooks
     const formik = useFormik({
         initialValues,
+        validationSchema,
         onSubmit: (values) => {
             console.log(values);
         },
@@ -63,7 +73,6 @@ const Plan: React.FC<PageProps> = () => {
                             placeholder=" "
                             value={formik.values.name}
                             onChange={formik.handleChange}
-                            required
                         />
                         <label
                             htmlFor="name"
@@ -71,6 +80,11 @@ const Plan: React.FC<PageProps> = () => {
                         >
                             Nome do Plano
                         </label>
+                        {formik.touched.name && formik.errors.name && (
+                            <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                {formik.errors.name}
+                            </p>
+                        )}
                     </div>
                     <div className="relative z-0 w-full mb-6 group">
                         <input
@@ -81,7 +95,6 @@ const Plan: React.FC<PageProps> = () => {
                             placeholder=" "
                             value={formik.values.value}
                             onChange={formik.handleChange}
-                            required
                         />
                         <label
                             htmlFor="value"
@@ -89,6 +102,11 @@ const Plan: React.FC<PageProps> = () => {
                         >
                             Valor da Recorrência
                         </label>
+                        {formik.touched.value && formik.errors.value && (
+                            <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                {formik.errors.value}
+                            </p>
+                        )}
                     </div>
                     <div className="relative z-0 w-full mb-6 group">
                         <select
@@ -98,7 +116,6 @@ const Plan: React.FC<PageProps> = () => {
                             placeholder=" "
                             value={formik.values.recurrence}
                             onChange={formik.handleChange}
-                            required
                         >
                             <option value="" disabled>
                                 Selecione um tipo de recorrência
@@ -115,6 +132,12 @@ const Plan: React.FC<PageProps> = () => {
                         >
                             Tipo de Recorrência
                         </label>
+                        {formik.touched.recurrence &&
+                            formik.errors.recurrence && (
+                                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                    {formik.errors.recurrence}
+                                </p>
+                            )}
                     </div>
                     <button
                         type="submit"
