@@ -2,6 +2,7 @@ import { MdArrowBack } from "@react-icons/all-files/md/MdArrowBack";
 import { useFormik } from "formik";
 import { HeadFC, PageProps, navigate } from "gatsby";
 import React from "react";
+import { When } from "react-if";
 import * as Yup from "yup";
 import SEO from "../components/SEO";
 import AuthLayout from "../layouts/Auth";
@@ -75,11 +76,15 @@ const Student: React.FC<PageProps> = (props) => {
                         >
                             Nome do Aluno
                         </label>
-                        {formik.touched.name && formik.errors.name && (
+                        <When
+                            condition={
+                                formik.touched.name && formik.errors.name
+                            }
+                        >
                             <p className="mt-2 text-sm text-red-600 dark:text-red-500">
                                 {formik.errors.name}
                             </p>
-                        )}
+                        </When>
                     </div>
                     <div className="relative z-0 w-full mb-6 group">
                         <input
@@ -97,11 +102,13 @@ const Student: React.FC<PageProps> = (props) => {
                         >
                             Cadastro de Pessoa Física - CPF
                         </label>
-                        {formik.touched.cpf && formik.errors.cpf && (
+                        <When
+                            condition={formik.touched.cpf && formik.errors.cpf}
+                        >
                             <p className="mt-2 text-sm text-red-600 dark:text-red-500">
                                 {formik.errors.cpf}
                             </p>
-                        )}
+                        </When>
                     </div>
                     <div className="grid md:grid-cols-2 md:gap-6">
                         <div className="relative z-0 w-full mb-6 group">
@@ -120,12 +127,16 @@ const Student: React.FC<PageProps> = (props) => {
                             >
                                 WhatsApp
                             </label>
-                            {formik.touched.whatsapp &&
-                                formik.errors.whatsapp && (
-                                    <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                                        {formik.errors.whatsapp}
-                                    </p>
-                                )}
+                            <When
+                                condition={
+                                    formik.touched.whatsapp &&
+                                    formik.errors.whatsapp
+                                }
+                            >
+                                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                    {formik.errors.whatsapp}
+                                </p>
+                            </When>
                         </div>
                         <div className="relative z-0 w-full mb-6 group">
                             <select
@@ -146,11 +157,15 @@ const Student: React.FC<PageProps> = (props) => {
                             >
                                 Plano
                             </label>
-                            {formik.touched.plan && formik.errors.plan && (
+                            <When
+                                condition={
+                                    formik.touched.plan && formik.errors.plan
+                                }
+                            >
                                 <p className="mt-2 text-sm text-red-600 dark:text-red-500">
                                     {formik.errors.plan}
                                 </p>
-                            )}
+                            </When>
                         </div>
                     </div>
                     <button

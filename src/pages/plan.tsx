@@ -2,6 +2,7 @@ import { MdArrowBack } from "@react-icons/all-files/md/MdArrowBack";
 import { useFormik } from "formik";
 import { HeadFC, PageProps, navigate } from "gatsby";
 import React from "react";
+import { When } from "react-if";
 import * as Yup from "yup";
 import SEO from "../components/SEO";
 import AuthLayout from "../layouts/Auth";
@@ -80,11 +81,15 @@ const Plan: React.FC<PageProps> = (props) => {
                         >
                             Nome do Plano
                         </label>
-                        {formik.touched.name && formik.errors.name && (
+                        <When
+                            condition={
+                                formik.touched.name && formik.errors.name
+                            }
+                        >
                             <p className="mt-2 text-sm text-red-600 dark:text-red-500">
                                 {formik.errors.name}
                             </p>
-                        )}
+                        </When>
                     </div>
                     <div className="relative z-0 w-full mb-6 group">
                         <input
@@ -102,11 +107,15 @@ const Plan: React.FC<PageProps> = (props) => {
                         >
                             Valor da Recorrência
                         </label>
-                        {formik.touched.value && formik.errors.value && (
+                        <When
+                            condition={
+                                formik.touched.value && formik.errors.value
+                            }
+                        >
                             <p className="mt-2 text-sm text-red-600 dark:text-red-500">
                                 {formik.errors.value}
                             </p>
-                        )}
+                        </When>
                     </div>
                     <div className="relative z-0 w-full mb-6 group">
                         <select
@@ -132,12 +141,16 @@ const Plan: React.FC<PageProps> = (props) => {
                         >
                             Tipo de Recorrência
                         </label>
-                        {formik.touched.recurrence &&
-                            formik.errors.recurrence && (
-                                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                                    {formik.errors.recurrence}
-                                </p>
-                            )}
+                        <When
+                            condition={
+                                formik.touched.recurrence &&
+                                formik.errors.recurrence
+                            }
+                        >
+                            <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                {formik.errors.recurrence}
+                            </p>
+                        </When>
                     </div>
                     <button
                         type="submit"
