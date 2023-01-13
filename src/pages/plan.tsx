@@ -53,7 +53,7 @@ const Plan: React.FC<PageProps> = () => {
                 </button>
                 <h1 className="mb-2 text-2xl">Cadastro de Plano</h1>
                 <hr className="mb-4" />
-                <form>
+                <form noValidate onSubmit={formik.handleSubmit}>
                     <div className="relative z-0 w-full mb-6 group">
                         <input
                             type="text"
