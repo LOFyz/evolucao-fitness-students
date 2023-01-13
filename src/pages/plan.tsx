@@ -1,12 +1,36 @@
 import { MdArrowBack } from "@react-icons/all-files/md/MdArrowBack";
+import { useFormik } from "formik";
 import { HeadFC, PageProps, navigate } from "gatsby";
 import React from "react";
 import SEO from "../components/SEO";
 import AuthLayout from "../layouts/Auth";
-import GlobalLayout from "../layouts/Global";
+
+type iFormData = {
+    name: string;
+    value: number;
+    recurrence: string;
+};
+
+const initialValues: iFormData = {
+    name: "",
+    value: 0,
+    recurrence: "",
+};
+
+const recurrences: Record<string, string> = {
+    monthly: "Mensal",
+    quarterly: "Trimestral",
+    yearly: "Anual",
+};
 
 const Plan: React.FC<PageProps> = () => {
     //* hooks
+    const formik = useFormik({
+        initialValues,
+        onSubmit: (values) => {
+            console.log(values);
+        },
+    });
 
     //* states
 
@@ -37,6 +61,8 @@ const Plan: React.FC<PageProps> = () => {
                             id="name"
                             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                             placeholder=" "
+                            value={formik.values.name}
+                            onChange={formik.handleChange}
                             required
                         />
                         <label
@@ -53,6 +79,8 @@ const Plan: React.FC<PageProps> = () => {
                             id="value"
                             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                             placeholder=" "
+                            value={formik.values.value}
+                            onChange={formik.handleChange}
                             required
                         />
                         <label
@@ -68,14 +96,18 @@ const Plan: React.FC<PageProps> = () => {
                             id="recurrence"
                             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                             placeholder=" "
+                            value={formik.values.recurrence}
+                            onChange={formik.handleChange}
                             required
                         >
-                            <option value="" disabled selected>
+                            <option value="" disabled>
                                 Selecione um tipo de recorrência
                             </option>
-                            <option value="monthly">Mensal</option>
-                            <option value="quarterly">Trimestral</option>
-                            <option value="yearly">Anual</option>
+                            {Object.entries(recurrences).map(([key, value]) => (
+                                <option key={key} value={key}>
+                                    {value}
+                                </option>
+                            ))}
                         </select>
                         <label
                             htmlFor="recurrence"
