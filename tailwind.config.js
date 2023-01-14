@@ -26,7 +26,7 @@ module.exports = {
             animation: {
                 "slide-from-left": "slide-from-left 0.25s ease-in-out",
                 "slide-from-right": "slide-from-right 0.25s ease-in-out",
-                "zoom-in": "zoom-in 0.25s ease-in-out",
+                "zoom-in": "zoom-in 0.50s ease-in-out",
             },
             keyframes: {
                 "slide-from-left": {
@@ -39,6 +39,8 @@ module.exports = {
                 },
                 "zoom-in": {
                     "0%": { transform: "scale(0)", opacity: 0 },
+                    "50%": { transform: "scale(1.1)", opacity: 1 },
+                    "75%": { transform: "scale(1.1)", opacity: 1 },
                     "100%": { transform: "scale(1)", opacity: 1 },
                 },
             },
