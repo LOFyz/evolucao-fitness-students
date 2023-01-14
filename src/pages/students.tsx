@@ -1,6 +1,7 @@
 import { HeadFC, PageProps, navigate } from "gatsby";
 import React from "react";
 import SEO from "../components/SEO";
+import Table from "../components/Table";
 import TableLayout from "../layouts/Table";
 
 const filterOptions = {
@@ -9,6 +10,34 @@ const filterOptions = {
     inactive: "Inativos",
     debtor: "Devedores",
 };
+
+const columns = [
+    { Header: "Não Devedor", accessor: "debtor" },
+    {
+        Header: "Nome",
+        accessor: "name",
+    },
+    {
+        Header: "WhatsApp",
+        accessor: "whatsapp",
+    },
+    {
+        Header: "Ultimo Pagamento",
+        accessor: "lastPayment",
+    },
+    {
+        Header: "Data de Cadastro",
+        accessor: "createdAt",
+    },
+    {
+        Header: "CPF",
+        accessor: "cpf",
+    },
+    {
+        Header: "Plano",
+        accessor: "plan",
+    },
+];
 
 const Students: React.FC<PageProps> = (props) => {
     //* hooks
@@ -35,7 +64,7 @@ const Students: React.FC<PageProps> = (props) => {
             className="animate-slide-from-right"
             filterOptions={filterOptions}
         >
-            <div></div>
+            <Table columns={columns} />
         </TableLayout>
     );
 };

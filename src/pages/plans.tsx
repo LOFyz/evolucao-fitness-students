@@ -1,7 +1,27 @@
 import { HeadFC, PageProps, navigate } from "gatsby";
 import React from "react";
 import SEO from "../components/SEO";
+import Table from "../components/Table";
 import TableLayout from "../layouts/Table";
+
+const columns = [
+    {
+        Header: "Nome",
+        accessor: "name",
+    },
+    {
+        Header: "Recorrência",
+        accessor: "recurrence",
+    },
+    {
+        Header: "Inscritos",
+        accessor: "subscribers",
+    },
+    {
+        Header: "Valor",
+        accessor: "value",
+    },
+];
 
 const Plans: React.FC<PageProps> = (props) => {
     //* hooks
@@ -24,7 +44,7 @@ const Plans: React.FC<PageProps> = (props) => {
             onClickAdd={() => navigate("/plan")}
             className="animate-slide-from-left"
         >
-            <div></div>
+            <Table columns={columns} />
         </TableLayout>
     );
 };
