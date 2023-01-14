@@ -19,6 +19,7 @@ type TableLayoutProps = {
     onChangeSearch?: React.ChangeEventHandler<HTMLInputElement>;
     onChangeOrderBy?: React.ChangeEventHandler<HTMLSelectElement>;
     onChangeFilter?: React.ChangeEventHandler<HTMLSelectElement>;
+    className?: string;
 };
 
 const orderByOptions = {
@@ -48,6 +49,7 @@ const TableLayout: React.FC<TableLayoutProps> = ({
     onChangeFilter,
     onChangeOrderBy,
     onChangeSearch,
+    className,
 }) => {
     //* hooks
 
@@ -62,7 +64,11 @@ const TableLayout: React.FC<TableLayoutProps> = ({
     //* render
     return (
         <GlobalLayout pageProps={pageProps}>
-            <div className="w-full h-full flex mx-auto flex-col p-8 gap-6">
+            <div
+                className={`w-full h-full flex mx-auto flex-col p-8 gap-6${
+                    className ? ` ${className}` : ""
+                }`}
+            >
                 <div className="flex flex-wrap justify-center md:justify-between gap-6">
                     <div
                         className={`flex flex-col gap-6 w-full${

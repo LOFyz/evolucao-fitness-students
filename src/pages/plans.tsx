@@ -22,6 +22,7 @@ const Plans: React.FC<PageProps> = (props) => {
             showAdd
             addTitle="Adicionar Plano"
             onClickAdd={() => navigate("/plan")}
+            className="animate-slide-from-left"
         >
             <div></div>
         </TableLayout>

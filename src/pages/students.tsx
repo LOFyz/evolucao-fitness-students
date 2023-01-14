@@ -25,6 +25,7 @@ const Students: React.FC<PageProps> = (props) => {
             showSearch
             addTitle="Adicionar Aluno"
             onClickAdd={() => navigate("/student")}
+            className="animate-slide-from-right"
         >
             <div></div>
         </TableLayout>
