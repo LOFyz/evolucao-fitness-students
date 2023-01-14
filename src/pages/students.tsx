@@ -1,3 +1,4 @@
+import { useFormik } from "formik";
 import { HeadFC, PageProps, navigate } from "gatsby";
 import React from "react";
 import SEO from "../components/SEO";
@@ -41,6 +42,14 @@ const columns = [
 
 const Students: React.FC<PageProps> = (props) => {
     //* hooks
+    const formik = useFormik({
+        initialValues: {
+            search: "",
+            orderBy: "ascending",
+            filter: "all",
+        },
+        onSubmit: () => {},
+    });
 
     //* states
 
@@ -63,6 +72,9 @@ const Students: React.FC<PageProps> = (props) => {
             onClickAdd={() => navigate("/student")}
             className="animate-slide-from-right"
             filterOptions={filterOptions}
+            onChangeFilter={formik.handleChange}
+            onChangeOrderBy={formik.handleChange}
+            onChangeSearch={formik.handleChange}
         >
             <Table columns={columns} />
         </TableLayout>
