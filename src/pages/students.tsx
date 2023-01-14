@@ -1,5 +1,6 @@
 import { AiFillCheckCircle } from "@react-icons/all-files/ai/AiFillCheckCircle";
 import { AiFillCloseCircle } from "@react-icons/all-files/ai/AiFillCloseCircle";
+import { Tooltip } from "flowbite-react";
 import { useFormik } from "formik";
 import { HeadFC, PageProps, navigate } from "gatsby";
 import React from "react";
@@ -12,10 +13,12 @@ const filterOptions = {
     active: "Ativos",
     inactive: "Inativos",
     debtor: "Devedores",
+    "not-debtor": "Não Devedores",
 };
 
 const columns = [
-    { Header: "Status", accessor: "debtor" },
+    { Header: "Possui debitos", accessor: "debtor" },
+    { Header: "Status", accessor: "status" },
     {
         Header: "Nome",
         accessor: "name",
@@ -43,6 +46,303 @@ const columns = [
 ];
 
 const data = [
+    {
+        debtor: true,
+        name: "Aluno 1",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "active",
+    },
+    {
+        debtor: false,
+        name: "Aluno 2",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "inactive",
+    },
+    {
+        debtor: false,
+        name: "Aluno 3",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "active",
+    },
+    {
+        debtor: true,
+        name: "Aluno 1",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "active",
+    },
+    {
+        debtor: false,
+        name: "Aluno 2",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "inactive",
+    },
+    {
+        debtor: false,
+        name: "Aluno 3",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "active",
+    },
+    {
+        debtor: true,
+        name: "Aluno 1",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "active",
+    },
+    {
+        debtor: false,
+        name: "Aluno 2",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "inactive",
+    },
+    {
+        debtor: false,
+        name: "Aluno 3",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "active",
+    },
+    {
+        debtor: true,
+        name: "Aluno 1",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "active",
+    },
+    {
+        debtor: false,
+        name: "Aluno 2",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "inactive",
+    },
+    {
+        debtor: false,
+        name: "Aluno 3",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "active",
+    },
+    {
+        debtor: true,
+        name: "Aluno 1",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "active",
+    },
+    {
+        debtor: false,
+        name: "Aluno 2",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "inactive",
+    },
+    {
+        debtor: false,
+        name: "Aluno 3",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "active",
+    },
+    {
+        debtor: true,
+        name: "Aluno 1",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "active",
+    },
+    {
+        debtor: false,
+        name: "Aluno 2",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "inactive",
+    },
+    {
+        debtor: false,
+        name: "Aluno 3",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "active",
+    },
+    {
+        debtor: true,
+        name: "Aluno 1",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "active",
+    },
+    {
+        debtor: false,
+        name: "Aluno 2",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "inactive",
+    },
+    {
+        debtor: false,
+        name: "Aluno 3",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "active",
+    },
+    {
+        debtor: true,
+        name: "Aluno 1",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "active",
+    },
+    {
+        debtor: false,
+        name: "Aluno 2",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "inactive",
+    },
+    {
+        debtor: false,
+        name: "Aluno 3",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "active",
+    },
+    {
+        debtor: true,
+        name: "Aluno 1",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "active",
+    },
+    {
+        debtor: false,
+        name: "Aluno 2",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "inactive",
+    },
+    {
+        debtor: false,
+        name: "Aluno 3",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+        status: "active",
+    },
     {
         debtor: true,
         name: "Aluno 1",
@@ -116,20 +416,50 @@ const Students: React.FC<PageProps> = (props) => {
         >
             <Table
                 columns={columns}
-                data={data.map((e) => ({
-                    ...e,
-                    debtor: e.debtor ? (
-                        <div className="flex items-center gap-2 text-red-500">
-                            <AiFillCloseCircle /> Devedor
-                        </div>
-                    ) : (
-                        <div className="flex items-center gap-2 text-green-500">
-                            <AiFillCheckCircle /> Nao Devedor
-                        </div>
-                    ),
-                    lastPayment: new Date(e.lastPayment).toLocaleDateString(),
-                    createdAt: new Date(e.createdAt).toLocaleDateString(),
-                }))}
+                data={data
+                    .filter((e) => {
+                        if (formik.values.filter === "all") return true;
+                        if (
+                            formik.values.filter === "active" &&
+                            e.status === "active"
+                        )
+                            return true;
+                        if (
+                            formik.values.filter === "inactive" &&
+                            e.status === "inactive"
+                        )
+                            return true;
+                        if (formik.values.filter === "debtor" && e.debtor)
+                            return true;
+                        if (formik.values.filter === "not-debtor" && !e.debtor)
+                            return true;
+                    })
+                    .map((e) => ({
+                        ...e,
+                        debtor: e.debtor ? (
+                            <div className="flex items-center gap-2 text-red-500">
+                                <AiFillCloseCircle /> Devedor
+                            </div>
+                        ) : (
+                            <div className="flex items-center gap-2 text-green-500">
+                                <AiFillCheckCircle /> Nao Devedor
+                            </div>
+                        ),
+                        lastPayment: new Date(
+                            e.lastPayment
+                        ).toLocaleDateString(),
+                        createdAt: new Date(e.createdAt).toLocaleDateString(),
+                        status:
+                            e.status === "active" ? (
+                                <Tooltip content="Aluno Ativo">
+                                    <span className="flex w-3 h-3 bg-green-500 rounded-full"></span>
+                                </Tooltip>
+                            ) : (
+                                <Tooltip content="Aluno Inativo">
+                                    <span className="flex w-3 h-3 bg-red-500 rounded-full"></span>
+                                </Tooltip>
+                            ),
+                    }))}
                 actions={(row) => [
                     { text: "Enviar mensagem", onClick: (e) => console.log(e) },
                     {
