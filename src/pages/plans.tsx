@@ -65,7 +65,14 @@ const Plans: React.FC<PageProps> = (props) => {
             onClickAdd={() => navigate("/plan")}
             className="animate-slide-from-left"
         >
-            <Table columns={columns} data={data} />
+            <Table
+                columns={columns}
+                data={data}
+                actions={[
+                    { text: "Editar", onClick: (e) => console.log(e) },
+                    { text: "Excluir", onClick: (e) => console.log(e) },
+                ]}
+            />
         </TableLayout>
     );
 };
