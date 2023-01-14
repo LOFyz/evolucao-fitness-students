@@ -21,7 +21,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children, pageProps }) => {
     //* render
     return (
         <GlobalLayout pageProps={pageProps}>
-            <div className="w-full h-full flex items-center justify-center">
+            <div className="w-full h-full flex items-center justify-center animate-zoom-in">
                 {children}
             </div>
         </GlobalLayout>
