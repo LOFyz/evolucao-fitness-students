@@ -1,4 +1,4 @@
-import { HeadFC, PageProps } from "gatsby";
+import { HeadFC, PageProps, navigate } from "gatsby";
 import React from "react";
 import SEO from "../components/SEO";
 import TableLayout from "../layouts/Table";
