@@ -1,5 +1,7 @@
 import { AiFillPlusCircle } from "@react-icons/all-files/ai/AiFillPlusCircle";
-import { PageProps } from "gatsby";
+import { HiUserCircle } from "@react-icons/all-files/hi/HiUserCircle";
+import { MdDashboard } from "@react-icons/all-files/md/MdDashboard";
+import { Link, PageProps } from "gatsby";
 import React from "react";
 import { When } from "react-if";
 import GlobalLayout from "./Global";
@@ -154,6 +156,56 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                     </div>
                 </div>
                 {children}
+                <div className="border-b border-gray-200 dark:border-gray-700 mt-auto">
+                    <ul className="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400 justify-end">
+                        <li className="mr-2">
+                            <Link
+                                to="/students"
+                                className={
+                                    pageProps.location.pathname.includes(
+                                        "/students"
+                                    )
+                                        ? "inline-flex p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group transition-all"
+                                        : "inline-flex p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group transition-all"
+                                }
+                            >
+                                <HiUserCircle
+                                    className={`w-5 h-5 mr-2${
+                                        pageProps.location.pathname.includes(
+                                            "/students"
+                                        )
+                                            ? " text-blue-600 dark:text-blue-500 transition-all"
+                                            : " text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300 transition-all"
+                                    }`}
+                                />
+                                Alunos
+                            </Link>
+                        </li>
+                        <li className="mr-2">
+                            <Link
+                                to="/plans"
+                                className={
+                                    pageProps.location.pathname.includes(
+                                        "/plans"
+                                    )
+                                        ? "inline-flex p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group transition-all"
+                                        : "inline-flex p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group transition-all"
+                                }
+                            >
+                                <MdDashboard
+                                    className={`w-5 h-5 mr-2${
+                                        pageProps.location.pathname.includes(
+                                            "/plans"
+                                        )
+                                            ? " text-blue-600 dark:text-blue-500 transition-all"
+                                            : " text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300 transition-all"
+                                    }`}
+                                />
+                                Planos
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </GlobalLayout>
     );
