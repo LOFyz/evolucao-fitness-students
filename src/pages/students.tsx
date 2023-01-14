@@ -23,6 +23,8 @@ const Students: React.FC<PageProps> = (props) => {
             showFilter
             showOrderBy
             showSearch
+            addTitle="Adicionar Aluno"
+            onClickAdd={() => navigate("/student")}
         >
             <div></div>
         </TableLayout>
