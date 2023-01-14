@@ -1,7 +1,7 @@
 import { MdArrowBack } from "@react-icons/all-files/md/MdArrowBack";
 import { useFormik } from "formik";
 import { HeadFC, PageProps, navigate } from "gatsby";
-import React from "react";
+import React, { useEffect } from "react";
 import { When } from "react-if";
 import * as Yup from "yup";
 import SEO from "../components/SEO";
@@ -12,6 +12,7 @@ type iFormData = {
     cpf: string;
     whatsapp: string;
     plan: string;
+    lastPayment: string;
     paidToday?: boolean;
 };
 
@@ -20,6 +21,7 @@ const initialValues: iFormData = {
     cpf: "",
     whatsapp: "",
     plan: "",
+    lastPayment: new Date().toISOString().slice(0, 10),
     paidToday: false,
 };
 
@@ -28,6 +30,9 @@ const validationSchema = Yup.object({
     cpf: Yup.string().required("O CPF do aluno é obrigatório"),
     whatsapp: Yup.string().required("O WhatsApp do aluno é obrigatório"),
     plan: Yup.string().required("O plano do aluno é obrigatório"),
+    lastPayment: Yup.date().required(
+        "A data do último pagamento é obrigatória"
+    ),
     paidToday: Yup.boolean(),
 });
 
@@ -48,6 +53,14 @@ const Student: React.FC<PageProps> = (props) => {
     //* handlers
 
     //* effects
+    useEffect(() => {
+        if (formik.values.paidToday) {
+            formik.setFieldValue(
+                "lastPayment",
+                new Date().toISOString().slice(0, 10)
+            );
+        }
+    }, [formik.values.paidToday]);
 
     //* render
     return (
@@ -170,6 +183,34 @@ const Student: React.FC<PageProps> = (props) => {
                                 </p>
                             </When>
                         </div>
+                    </div>
+                    <div className="relative z-0 w-full mb-6 group">
+                        <input
+                            type="date"
+                            name="lastPayment"
+                            id="lastPayment"
+                            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            placeholder=" "
+                            value={formik.values.lastPayment}
+                            onChange={formik.handleChange}
+                            disabled={formik.values.paidToday}
+                        />
+                        <label
+                            htmlFor="lastPayment"
+                            className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                        >
+                            Ultimo pagamento
+                        </label>
+                        <When
+                            condition={
+                                formik.touched.lastPayment &&
+                                formik.errors.lastPayment
+                            }
+                        >
+                            <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                {formik.errors.lastPayment}
+                            </p>
+                        </When>
                     </div>
                     <div className="flex items-start mb-6">
                         <div className="flex items-center h-5">
