@@ -23,6 +23,27 @@ const columns = [
     },
 ];
 
+const data = [
+    {
+        name: "Plano 1",
+        recurrence: "Mensal",
+        subscribers: 10,
+        value: 100,
+    },
+    {
+        name: "Plano 2",
+        recurrence: "Trimestral",
+        subscribers: 10,
+        value: 100,
+    },
+    {
+        name: "Plano 3",
+        recurrence: "Anual",
+        subscribers: 10,
+        value: 100,
+    },
+];
+
 const Plans: React.FC<PageProps> = (props) => {
     //* hooks
 
@@ -44,7 +65,7 @@ const Plans: React.FC<PageProps> = (props) => {
             onClickAdd={() => navigate("/plan")}
             className="animate-slide-from-left"
         >
-            <Table columns={columns} />
+            <Table columns={columns} data={data} />
         </TableLayout>
     );
 };

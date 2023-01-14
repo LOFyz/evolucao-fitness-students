@@ -1,3 +1,5 @@
+import { AiFillCheckCircle } from "@react-icons/all-files/ai/AiFillCheckCircle";
+import { AiFillCloseCircle } from "@react-icons/all-files/ai/AiFillCloseCircle";
 import { useFormik } from "formik";
 import { HeadFC, PageProps, navigate } from "gatsby";
 import React from "react";
@@ -13,7 +15,7 @@ const filterOptions = {
 };
 
 const columns = [
-    { Header: "Não Devedor", accessor: "debtor" },
+    { Header: "Status", accessor: "debtor" },
     {
         Header: "Nome",
         accessor: "name",
@@ -37,6 +39,39 @@ const columns = [
     {
         Header: "Plano",
         accessor: "plan",
+    },
+];
+
+const data = [
+    {
+        debtor: true,
+        name: "Aluno 1",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+    },
+    {
+        debtor: false,
+        name: "Aluno 2",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
+    },
+    {
+        debtor: false,
+        name: "Aluno 3",
+        whatsapp: "11999999999",
+        lastPayment:
+            "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
+        cpf: "111.111.111-11",
+        plan: "Plano 1",
     },
 ];
 
@@ -76,7 +111,23 @@ const Students: React.FC<PageProps> = (props) => {
             onChangeOrderBy={formik.handleChange}
             onChangeSearch={formik.handleChange}
         >
-            <Table columns={columns} />
+            <Table
+                columns={columns}
+                data={data.map((e) => ({
+                    ...e,
+                    debtor: e.debtor ? (
+                        <div className="flex items-center gap-2 text-red-500">
+                            <AiFillCloseCircle /> Devedor
+                        </div>
+                    ) : (
+                        <div className="flex items-center gap-2 text-green-500">
+                            <AiFillCheckCircle /> Nao Devedor
+                        </div>
+                    ),
+                    lastPayment: new Date(e.lastPayment).toLocaleDateString(),
+                    createdAt: new Date(e.createdAt).toLocaleDateString(),
+                }))}
+            />
         </TableLayout>
     );
 };
