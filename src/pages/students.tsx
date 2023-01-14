@@ -435,6 +435,29 @@ const Students: React.FC<PageProps> = (props) => {
                             return true;
                     })
                     .filter((e) => e.name.includes(formik.values.search))
+                    .sort((a, b) => {
+                        if (formik.values.orderBy === "ascending") {
+                            if (a.name < b.name) return -1;
+                            if (a.name > b.name) return 1;
+                            return 0;
+                        }
+                        if (formik.values.orderBy === "descending") {
+                            if (a.name > b.name) return -1;
+                            if (a.name < b.name) return 1;
+                            return 0;
+                        }
+                        if (formik.values.orderBy === "oldest") {
+                            if (a.createdAt < b.createdAt) return -1;
+                            if (a.createdAt > b.createdAt) return 1;
+                            return 0;
+                        }
+                        if (formik.values.orderBy === "newest") {
+                            if (a.createdAt > b.createdAt) return -1;
+                            if (a.createdAt < b.createdAt) return 1;
+                            return 0;
+                        }
+                        return 0;
+                    })
                     .map((e) => ({
                         ...e,
                         debtor: e.debtor ? (
