@@ -13,14 +13,7 @@ type TableProps = {
     }[];
 };
 
-const Table: React.FC<TableProps> = ({
-    columns = [],
-    data = [],
-    actions = [
-        { onClick: () => {}, text: "delete" },
-        { onClick: () => {}, text: "edit" },
-    ],
-}) => {
+const Table: React.FC<TableProps> = ({ columns = [], data = [], actions }) => {
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
         useTable({ columns: columns as any, data });
 
@@ -74,7 +67,7 @@ const Table: React.FC<TableProps> = ({
                                             arrowIcon={false}
                                             inline
                                         >
-                                            {actions.map((action) => (
+                                            {actions?.map((action) => (
                                                 <Dropdown.Item
                                                     key={action.text}
                                                     onClick={() =>
