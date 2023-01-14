@@ -20,6 +20,7 @@ type TableLayoutProps = {
     onChangeOrderBy?: React.ChangeEventHandler<HTMLSelectElement>;
     onChangeFilter?: React.ChangeEventHandler<HTMLSelectElement>;
     className?: string;
+    filterOptions?: Record<string, string>;
 };
 
 const orderByOptions = {
@@ -27,13 +28,6 @@ const orderByOptions = {
     descending: "Z-A",
     newer: "Mais recentes",
     older: "Mais antigos",
-};
-
-const filterOptions = {
-    all: "Todos",
-    active: "Ativos",
-    inactive: "Inativos",
-    debtor: "Devedores",
 };
 
 const TableLayout: React.FC<TableLayoutProps> = ({
@@ -50,6 +44,7 @@ const TableLayout: React.FC<TableLayoutProps> = ({
     onChangeOrderBy,
     onChangeSearch,
     className,
+    filterOptions = { all: "Todos" },
 }) => {
     //* hooks
 

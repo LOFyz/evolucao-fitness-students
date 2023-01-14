@@ -3,6 +3,13 @@ import React from "react";
 import SEO from "../components/SEO";
 import TableLayout from "../layouts/Table";
 
+const filterOptions = {
+    all: "Todos",
+    active: "Ativos",
+    inactive: "Inativos",
+    debtor: "Devedores",
+};
+
 const Students: React.FC<PageProps> = (props) => {
     //* hooks
 
@@ -26,6 +33,7 @@ const Students: React.FC<PageProps> = (props) => {
             addTitle="Adicionar Aluno"
             onClickAdd={() => navigate("/student")}
             className="animate-slide-from-right"
+            filterOptions={filterOptions}
         >
             <div></div>
         </TableLayout>
