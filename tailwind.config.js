@@ -22,7 +22,27 @@ module.exports = {
             "text-light": "#000",
             "text-dark": "#000",
         },
-        extend: {},
+        extend: {
+            animation: {
+                "slide-from-left": "slide-from-left 0.25s ease-in-out",
+                "slide-from-right": "slide-from-right 0.25s ease-in-out",
+                "zoom-in": "zoom-in 0.25s ease-in-out",
+            },
+            keyframes: {
+                "slide-from-left": {
+                    "0%": { transform: "translateX(-100%)", opacity: 0 },
+                    "100%": { transform: "translateX(0)", opacity: 1 },
+                },
+                "slide-from-right": {
+                    "0%": { transform: "translateX(100%)", opacity: 0 },
+                    "100%": { transform: "translateX(0)", opacity: 1 },
+                },
+                "zoom-in": {
+                    "0%": { transform: "scale(0)", opacity: 0 },
+                    "100%": { transform: "scale(1)", opacity: 1 },
+                },
+            },
+        },
     },
     plugins: [require("flowbite/plugin")],
 };
