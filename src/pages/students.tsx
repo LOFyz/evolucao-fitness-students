@@ -52,6 +52,7 @@ const data = [
         createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
         cpf: "111.111.111-11",
         plan: "Plano 1",
+        status: "active",
     },
     {
         debtor: false,
@@ -62,6 +63,7 @@ const data = [
         createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
         cpf: "111.111.111-11",
         plan: "Plano 1",
+        status: "inactive",
     },
     {
         debtor: false,
@@ -72,6 +74,7 @@ const data = [
         createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
         cpf: "111.111.111-11",
         plan: "Plano 1",
+        status: "active",
     },
 ];
 
@@ -127,6 +130,21 @@ const Students: React.FC<PageProps> = (props) => {
                     lastPayment: new Date(e.lastPayment).toLocaleDateString(),
                     createdAt: new Date(e.createdAt).toLocaleDateString(),
                 }))}
+                actions={(row) => [
+                    { text: "Enviar mensagem", onClick: (e) => console.log(e) },
+                    {
+                        text: "Atualizar pagamento para hoje",
+                        onClick: (e) => console.log(e),
+                    },
+                    { text: "Editar", onClick: (e) => console.log(e) },
+                    {
+                        text:
+                            row.original.status === "active"
+                                ? "Inativar"
+                                : "Ativar",
+                        onClick: (e) => console.log(e),
+                    },
+                ]}
             />
         </TableLayout>
     );
