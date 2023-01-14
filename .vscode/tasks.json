@@ -11,6 +11,17 @@
                 "group": "develop"
             },
             "problemMatcher": []
+        },
+        {
+            "label": "Start project (LAN)",
+            "type": "shell",
+            "command": "source ~/.nvm/nvm.sh && nvm install lts/hydrogen && nvm use lts/hydrogen && npm i -g yarn && yarn && yarn start:lan",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "group": "develop"
+            },
+            "problemMatcher": []
         }
     ]
 }
