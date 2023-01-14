@@ -434,6 +434,7 @@ const Students: React.FC<PageProps> = (props) => {
                         if (formik.values.filter === "not-debtor" && !e.debtor)
                             return true;
                     })
+                    .filter((e) => e.name.includes(formik.values.search))
                     .map((e) => ({
                         ...e,
                         debtor: e.debtor ? (
