@@ -2,7 +2,7 @@ import { AiFillPlusCircle } from "@react-icons/all-files/ai/AiFillPlusCircle";
 import { HiUserCircle } from "@react-icons/all-files/hi/HiUserCircle";
 import { MdDashboard } from "@react-icons/all-files/md/MdDashboard";
 import { Link, PageProps } from "gatsby";
-import React from "react";
+import React, { HTMLProps } from "react";
 import { When } from "react-if";
 import GlobalLayout from "./Global";
 
@@ -21,7 +21,7 @@ type TableLayoutProps = {
     onChangeFilter?: React.ChangeEventHandler<HTMLSelectElement>;
     className?: string;
     filterOptions?: Record<string, string>;
-};
+} & HTMLProps<HTMLDivElement>;
 
 const orderByOptions = {
     ascending: "A-Z",
@@ -45,6 +45,7 @@ const TableLayout: React.FC<TableLayoutProps> = ({
     onChangeSearch,
     className,
     filterOptions = { all: "Todos" },
+    ...rest
 }) => {
     //* hooks
 
@@ -63,6 +64,7 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                 className={`w-full h-full flex mx-auto flex-col p-8 gap-6${
                     className ? ` ${className}` : ""
                 }`}
+                {...rest}
             >
                 <div className="flex flex-wrap justify-center md:justify-between gap-6">
                     <div

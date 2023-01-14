@@ -64,6 +64,13 @@ const Plans: React.FC<PageProps> = (props) => {
             addTitle="Adicionar Plano"
             onClickAdd={() => navigate("/plan")}
             className="animate-slide-from-left"
+            onAnimationEnd={() => {
+                document
+                    .querySelectorAll(".tooltip")
+                    .forEach((element) =>
+                        element.setAttribute("style", "position:absolute;")
+                    );
+            }}
         >
             <Table
                 columns={columns}
