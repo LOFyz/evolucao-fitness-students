@@ -2,14 +2,14 @@ import { FiMoreVertical } from "@react-icons/all-files/fi/FiMoreVertical";
 import { Dropdown } from "flowbite-react";
 import React from "react";
 import { When } from "react-if";
-import { useTable } from "react-table";
+import { Row, useTable } from "react-table";
 
 type TableProps = {
     columns: { Header: string; accessor: string }[];
     data?: Record<string, unknown>[];
-    actions?: {
+    actions?: (row: Row<Record<string, unknown>>) => {
         text: string;
-        onClick: (row: Record<string, unknown>) => void;
+        onClick: (row: Row<Record<string, unknown>>) => void;
     }[];
 };
 
@@ -67,21 +67,17 @@ const Table: React.FC<TableProps> = ({ columns = [], data = [], actions }) => {
                                             arrowIcon={false}
                                             inline
                                         >
-                                            {actions?.map((action) => (
-                                                <Dropdown.Item
-                                                    key={action.text}
-                                                    onClick={() =>
-                                                        action.onClick(
-                                                            row as unknown as Record<
-                                                                string,
-                                                                unknown
-                                                            >
-                                                        )
-                                                    }
-                                                >
-                                                    {action.text}
-                                                </Dropdown.Item>
-                                            ))}
+                                            {actions &&
+                                                actions(row).map((action) => (
+                                                    <Dropdown.Item
+                                                        key={action.text}
+                                                        onClick={() =>
+                                                            action.onClick(row)
+                                                        }
+                                                    >
+                                                        {action.text}
+                                                    </Dropdown.Item>
+                                                ))}
                                         </Dropdown>
                                     </td>
                                 </When>
