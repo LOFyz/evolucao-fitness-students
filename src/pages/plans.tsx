@@ -68,7 +68,7 @@ const Plans: React.FC<PageProps> = (props) => {
             <Table
                 columns={columns}
                 data={data}
-                actions={[
+                actions={() => [
                     { text: "Editar", onClick: (e) => console.log(e) },
                     { text: "Excluir", onClick: (e) => console.log(e) },
                 ]}
