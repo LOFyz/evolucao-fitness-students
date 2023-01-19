@@ -1,13 +1,12 @@
 import { PageProps } from "gatsby";
 import React from "react";
-import GlobalLayout from "./Global";
 
 type AuthLayoutProps = {
     children?: React.ReactNode;
     pageProps: PageProps;
 };
 
-const AuthLayout: React.FC<AuthLayoutProps> = ({ children, pageProps }) => {
+const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
     //* hooks
 
     //* states
@@ -20,13 +19,11 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children, pageProps }) => {
 
     //* render
     return (
-        <GlobalLayout pageProps={pageProps}>
-            <div className="w-full h-full overflow-hidden">
-                <div className="w-full h-full flex items-center justify-center animate-zoom-in ">
-                    {children}
-                </div>
+        <div className="w-full h-full overflow-hidden">
+            <div className="w-full h-full flex items-center justify-center animate-zoom-in ">
+                {children}
             </div>
-        </GlobalLayout>
+        </div>
     );
 };
 
