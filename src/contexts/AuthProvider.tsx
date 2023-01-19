@@ -13,7 +13,10 @@ import React, {
     useState,
 } from "react";
 import { When } from "react-if";
-import { AuthContext as AuthContextType } from "../@types/Contexts/AuthContext";
+import {
+    AuthContext as AuthContextType,
+    SignIn,
+} from "../@types/Contexts/AuthContext";
 import swal from "../services/swal";
 
 export const AuthContext = createContext({} as AuthContextType);
@@ -31,12 +34,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     //* constants
 
     //* handlers
-    const signIn = useCallback(
-        (email: string, password: string) => {
+    const signIn: SignIn = useCallback(
+        (email, password, remember) => {
             const auth = getAuth();
-            const res = signInWithEmailAndPassword(auth, email, password)
+            signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     setUser(userCredential.user);
+
+                    if (remember) {
+                        localStorage.setItem("remember", "true");
+                    }
                 })
                 .catch((error) => {
                     swal.fire({
@@ -51,6 +58,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     );
 
     //* effects
+    useLayoutEffect(() => {
+        const auth = getAuth();
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (localStorage.getItem("remember") === "true") {
+                setUser(user);
+            }
+        });
+
+        return () => {
+            unsubscribe();
+        };
+    }, []);
+
     useLayoutEffect(() => {
         if (!user && window.location.pathname !== "/") {
             navigate("/");

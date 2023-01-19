@@ -4,8 +4,8 @@ import React from "react";
 import { When } from "react-if";
 import * as Yup from "yup";
 import SEO from "../components/SEO";
-import AuthLayout from "../layouts/Auth";
 import { useAuth } from "../contexts/AuthProvider";
+import AuthLayout from "../layouts/Auth";
 
 type iFormData = {
     email: string;
@@ -32,7 +32,7 @@ const Login: React.FC<PageProps> = (props) => {
         initialValues,
         validationSchema,
         onSubmit: (values) => {
-            signIn(values.email, values.password);
+            signIn(values.email, values.password, values.keepSignedIn);
         },
     });
 
