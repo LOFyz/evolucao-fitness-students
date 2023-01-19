@@ -1,4 +1,9 @@
-import { PageProps, navigate } from "gatsby";
+import {
+    UserCredential,
+    getAuth,
+    signInWithEmailAndPassword,
+} from "firebase/auth";
+import { navigate } from "gatsby";
 import React, {
     createContext,
     useCallback,
@@ -8,25 +13,16 @@ import React, {
     useState,
 } from "react";
 import { When } from "react-if";
-import {
-    getAuth,
-    UserCredential,
-    signInWithEmailAndPassword,
-} from "firebase/auth";
-import swal from "../services/swal";
 import { AuthContext as AuthContextType } from "../@types/Contexts/AuthContext";
+import swal from "../services/swal";
 
 export const AuthContext = createContext({} as AuthContextType);
 
 type AuthProviderProps = {
     children: React.ReactNode;
-    pageProps: PageProps;
 };
 
-export const AuthProvider: React.FC<AuthProviderProps> = ({
-    children,
-    pageProps: { location },
-}) => {
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     //* hooks
 
     //* states
@@ -56,9 +52,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
 
     //* effects
     useLayoutEffect(() => {
-        if (!user && location.pathname !== "/") {
+        if (!user && window.location.pathname !== "/") {
             navigate("/");
-        } else if (user && location.pathname === "/") {
+        } else if (user && window.location.pathname === "/") {
             navigate("/students");
         }
     }, [user]);
@@ -67,7 +63,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
 
     //* render
     return (
-        <When condition={!!user || location.pathname === "/"}>
+        <When condition={!!user || window.location.pathname === "/"}>
             <AuthContext.Provider value={value}>
                 {children}
             </AuthContext.Provider>
