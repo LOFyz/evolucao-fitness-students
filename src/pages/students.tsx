@@ -10,10 +10,10 @@ import TableLayout from "../layouts/Table";
 
 const filterOptions = {
     all: "Todos",
-    active: "Ativos",
-    inactive: "Inativos",
     debtor: "Devedores",
     "not-debtor": "Não Devedores",
+    active: "Ativos",
+    inactive: "Inativos",
 };
 
 const columns = [
@@ -81,7 +81,7 @@ const data = [
     },
     {
         debtor: true,
-        name: "Aluno 1",
+        name: "Fulano",
         whatsapp: "11999999999",
         lastPayment:
             "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
@@ -434,7 +434,14 @@ const Students: React.FC<PageProps> = (props) => {
                         if (formik.values.filter === "not-debtor" && !e.debtor)
                             return true;
                     })
-                    .filter((e) => e.name.includes(formik.values.search))
+                    .filter((e) =>
+                        e.name
+                            .toLowerCase()
+                            .normalize()
+                            .includes(
+                                formik.values.search.toLowerCase().normalize()
+                            )
+                    )
                     .sort((a, b) => {
                         if (formik.values.orderBy === "ascending") {
                             if (a.name < b.name) return -1;
