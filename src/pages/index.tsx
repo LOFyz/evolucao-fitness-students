@@ -5,6 +5,7 @@ import { When } from "react-if";
 import * as Yup from "yup";
 import SEO from "../components/SEO";
 import AuthLayout from "../layouts/Auth";
+import { useAuth } from "../contexts/AuthProvider";
 
 type iFormData = {
     email: string;
@@ -26,11 +27,12 @@ const validationSchema = Yup.object({
 
 const Login: React.FC<PageProps> = (props) => {
     //* hooks
+    const { signIn } = useAuth();
     const formik = useFormik({
         initialValues,
         validationSchema,
         onSubmit: (values) => {
-            console.log(values);
+            signIn(values.email, values.password);
         },
     });
 
