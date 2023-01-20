@@ -4,6 +4,7 @@ import { HeadFC, PageProps, navigate } from "gatsby";
 import React, { useEffect } from "react";
 import { When } from "react-if";
 import * as Yup from "yup";
+import CpfInput from "../components/Form/CpfInput";
 import PhoneInput from "../components/Form/PhoneInput";
 import SEO from "../components/SEO";
 import AuthLayout from "../layouts/Auth";
@@ -108,7 +109,7 @@ const Student: React.FC<PageProps> = (props) => {
                         </When>
                     </div>
                     <div className="relative z-0 w-full mb-6 group">
-                        <input
+                        <CpfInput
                             type="text"
                             name="cpf"
                             id="cpf"
