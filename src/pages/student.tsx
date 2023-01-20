@@ -4,6 +4,7 @@ import { HeadFC, PageProps, navigate } from "gatsby";
 import React, { useEffect } from "react";
 import { When } from "react-if";
 import * as Yup from "yup";
+import PhoneInput from "../components/Form/PhoneInput";
 import SEO from "../components/SEO";
 import AuthLayout from "../layouts/Auth";
 
@@ -28,7 +29,11 @@ const initialValues: iFormData = {
 const validationSchema = Yup.object({
     name: Yup.string().required("O nome do aluno é obrigatório"),
     cpf: Yup.string().required("O CPF do aluno é obrigatório"),
-    whatsapp: Yup.string().required("O WhatsApp do aluno é obrigatório"),
+    whatsapp: Yup.string()
+        .required("O WhatsApp do aluno é obrigatório")
+        .matches(/[\d()+\s]*/, "Insira apenas números")
+        .min(20, "Insira um WhatsApp valido")
+        .max(20, "Numero do WhatsApp muito longo"),
     plan: Yup.string().required("O plano do aluno é obrigatório"),
     lastPayment: Yup.date().required(
         "A data do último pagamento é obrigatória"
@@ -128,8 +133,7 @@ const Student: React.FC<PageProps> = (props) => {
                     </div>
                     <div className="grid md:grid-cols-2 md:gap-6">
                         <div className="relative z-0 w-full mb-6 group">
-                            <input
-                                type="tel"
+                            <PhoneInput
                                 name="whatsapp"
                                 id="whatsapp"
                                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
