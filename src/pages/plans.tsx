@@ -47,6 +47,11 @@ const data = [
     },
 ];
 
+const actions = () => [
+    { text: "Editar", onClick: (e) => console.log(e) },
+    { text: "Excluir", onClick: (e) => console.log(e) },
+];
+
 const Plans: React.FC<PageProps> = (props) => {
     //* hooks
 
@@ -75,14 +80,7 @@ const Plans: React.FC<PageProps> = (props) => {
                     );
             }}
         >
-            <Table
-                columns={columns}
-                data={data}
-                actions={() => [
-                    { text: "Editar", onClick: (e) => console.log(e) },
-                    { text: "Excluir", onClick: (e) => console.log(e) },
-                ]}
-            />
+            <Table columns={columns} data={data} actions={actions} />
         </TableLayout>
     );
 };
