@@ -1,8 +1,8 @@
 import { MdArrowBack } from "@react-icons/all-files/md/MdArrowBack";
 import { useFormik } from "formik";
 import { HeadFC, PageProps, navigate } from "gatsby";
-import React, { useEffect, useMemo, useState } from "react";
-import { When } from "react-if";
+import { default as React, useEffect, useMemo, useState } from "react";
+import { Else, If, Then, When } from "react-if";
 import * as Yup from "yup";
 import CpfInput from "../components/Form/CpfInput";
 import PhoneInput from "../components/Form/PhoneInput";
@@ -92,6 +92,7 @@ const Student: React.FC<PageProps> = (props) => {
 
     useEffect(() => {
         if (id) {
+            //TODO: replace mock with data
             const _maySubmit =
                 JSON.stringify({
                     name: formik.values.name,
@@ -104,7 +105,7 @@ const Student: React.FC<PageProps> = (props) => {
                 JSON.stringify({
                     name: "Teste",
                     cpf: "123.456.789-00",
-                    whatsapp: "(11) 12345-6789",
+                    whatsapp: "+55 (11) 1.2345-6789",
                     plan: "1",
                     lastPayment: "2021-01-01",
                     paidToday: false,
@@ -329,7 +330,15 @@ const Student: React.FC<PageProps> = (props) => {
                         disabled={!maySubmit}
                         className="text-text-dark bg-primary hover:bg-primary-dark disabled:hover:bg-primary disabled:opacity-70 focus:ring-4 focus:outline-none focus:ring-primary-light font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary-dark transition-colors duration-300 ease-in-out"
                     >
-                        Criar
+                        <If condition={!!id}>
+                            <Then>
+                                <span>Atualizar Aluno</span>
+                            </Then>
+
+                            <Else>
+                                <span>Cadastrar Aluno</span>
+                            </Else>
+                        </If>
                     </button>
                 </form>
             </div>
