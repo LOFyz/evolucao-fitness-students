@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import CpfInput from "../components/Form/CpfInput";
 import PhoneInput from "../components/Form/PhoneInput";
 import SEO from "../components/SEO";
+import backgroundImage from "../images/background.jpg";
 import AuthLayout from "../layouts/Auth";
 
 type iFormData = {
@@ -71,6 +72,11 @@ const Student: React.FC<PageProps> = (props) => {
     //* render
     return (
         <AuthLayout pageProps={props}>
+            <img
+                src={backgroundImage}
+                alt=""
+                className="absolute opacity-5 h-full w-full saturate-0 object-cover"
+            />
             <div className="flex flex-col md:relative w-96 p-5">
                 <button
                     type="submit"
