@@ -18,7 +18,7 @@ const Table: React.FC<TableProps> = ({ columns = [], data = [], actions }) => {
         useTable({ columns: columns as any, data });
 
     return (
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg h-full">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg h-full min-h-[15rem]">
             <table
                 {...getTableProps()}
                 className="w-full text-sm text-left text-text"
