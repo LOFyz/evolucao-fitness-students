@@ -123,16 +123,24 @@ const Plan: React.FC<PageProps> = (props) => {
                         <select
                             name="recurrence"
                             id="recurrence"
-                            className="block py-2.5 px-0 w-full text-sm text-text bg-transparent border-0 border-b-2 border-background-light appearance-none dark:text-text-dark dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-primary peer"
+                            className="block py-2.5 px-0 w-full text-sm text-text bg-transparent border-0 border-b-2 border-background-light appearance-none dark:text-text-dark dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-primary peer color-scheme-dark"
                             placeholder=" "
                             value={formik.values.recurrence}
                             onChange={formik.handleChange}
                         >
-                            <option value="" disabled>
+                            <option
+                                value=""
+                                disabled
+                                className="text-text bg-background-light opacity-75"
+                            >
                                 Selecione um tipo de recorrência
                             </option>
                             {Object.entries(recurrences).map(([key, value]) => (
-                                <option key={key} value={key}>
+                                <option
+                                    key={key}
+                                    value={key}
+                                    className="text-primary bg-background-light"
+                                >
                                     {value}
                                 </option>
                             ))}

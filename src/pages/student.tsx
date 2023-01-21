@@ -170,7 +170,11 @@ const Student: React.FC<PageProps> = (props) => {
                                 value={formik.values.plan}
                                 onChange={formik.handleChange}
                             >
-                                <option value="" disabled>
+                                <option
+                                    value=""
+                                    disabled
+                                    className="text-primary bg-background-light"
+                                >
                                     Selecione um plano
                                 </option>
                             </select>

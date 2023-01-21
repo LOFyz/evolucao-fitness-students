@@ -117,7 +117,11 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                             >
                                 {Object.entries(orderByOptions).map(
                                     ([key, value]) => (
-                                        <option key={key} value={key}>
+                                        <option
+                                            key={key}
+                                            value={key}
+                                            className="text-primary bg-background-light"
+                                        >
                                             {value}
                                         </option>
                                     )
@@ -142,7 +146,11 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                             >
                                 {Object.entries(filterOptions).map(
                                     ([key, value]) => (
-                                        <option key={key} value={key}>
+                                        <option
+                                            key={key}
+                                            value={key}
+                                            className="text-primary bg-background-light"
+                                        >
                                             {value}
                                         </option>
                                     )
