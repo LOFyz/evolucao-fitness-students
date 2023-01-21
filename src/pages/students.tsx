@@ -47,6 +47,7 @@ const columns = [
 
 const data = [
     {
+        id: 1,
         debtor: true,
         name: "Aluno 1",
         whatsapp: "+55 (99) 9.9999-9999",
@@ -58,6 +59,7 @@ const data = [
         status: "active",
     },
     {
+        id: 1,
         debtor: false,
         name: "Aluno 2",
         whatsapp: "11999999999",
@@ -69,6 +71,7 @@ const data = [
         status: "inactive",
     },
     {
+        id: 1,
         debtor: false,
         name: "Aluno 3",
         whatsapp: "11999999999",
@@ -80,6 +83,7 @@ const data = [
         status: "active",
     },
     {
+        id: 1,
         debtor: true,
         name: "Fulano",
         whatsapp: "11999999999",
@@ -91,6 +95,7 @@ const data = [
         status: "active",
     },
     {
+        id: 1,
         debtor: false,
         name: "Aluno 2",
         whatsapp: "11999999999",
@@ -102,6 +107,7 @@ const data = [
         status: "inactive",
     },
     {
+        id: 1,
         debtor: false,
         name: "Aluno 3",
         whatsapp: "11999999999",
@@ -113,6 +119,7 @@ const data = [
         status: "active",
     },
     {
+        id: 1,
         debtor: true,
         name: "Aluno 1",
         whatsapp: "11999999999",
@@ -124,6 +131,7 @@ const data = [
         status: "active",
     },
     {
+        id: 1,
         debtor: false,
         name: "Aluno 2",
         whatsapp: "11999999999",
@@ -135,6 +143,7 @@ const data = [
         status: "inactive",
     },
     {
+        id: 1,
         debtor: false,
         name: "Aluno 3",
         whatsapp: "11999999999",
@@ -146,6 +155,7 @@ const data = [
         status: "active",
     },
     {
+        id: 1,
         debtor: true,
         name: "Aluno 1",
         whatsapp: "11999999999",
@@ -157,6 +167,7 @@ const data = [
         status: "active",
     },
     {
+        id: 1,
         debtor: false,
         name: "Aluno 2",
         whatsapp: "11999999999",
@@ -168,6 +179,7 @@ const data = [
         status: "inactive",
     },
     {
+        id: 1,
         debtor: false,
         name: "Aluno 3",
         whatsapp: "11999999999",
@@ -179,6 +191,7 @@ const data = [
         status: "active",
     },
     {
+        id: 1,
         debtor: true,
         name: "Aluno 1",
         whatsapp: "11999999999",
@@ -190,6 +203,7 @@ const data = [
         status: "active",
     },
     {
+        id: 1,
         debtor: false,
         name: "Aluno 2",
         whatsapp: "11999999999",
@@ -201,6 +215,7 @@ const data = [
         status: "inactive",
     },
     {
+        id: 1,
         debtor: false,
         name: "Aluno 3",
         whatsapp: "11999999999",
@@ -212,6 +227,7 @@ const data = [
         status: "active",
     },
     {
+        id: 1,
         debtor: true,
         name: "Aluno 1",
         whatsapp: "11999999999",
@@ -223,6 +239,7 @@ const data = [
         status: "active",
     },
     {
+        id: 1,
         debtor: false,
         name: "Aluno 2",
         whatsapp: "11999999999",
@@ -234,6 +251,7 @@ const data = [
         status: "inactive",
     },
     {
+        id: 1,
         debtor: false,
         name: "Aluno 3",
         whatsapp: "11999999999",
@@ -245,6 +263,7 @@ const data = [
         status: "active",
     },
     {
+        id: 1,
         debtor: true,
         name: "Aluno 1",
         whatsapp: "11999999999",
@@ -256,6 +275,7 @@ const data = [
         status: "active",
     },
     {
+        id: 1,
         debtor: false,
         name: "Aluno 2",
         whatsapp: "11999999999",
@@ -267,6 +287,7 @@ const data = [
         status: "inactive",
     },
     {
+        id: 1,
         debtor: false,
         name: "Aluno 3",
         whatsapp: "11999999999",
@@ -278,6 +299,7 @@ const data = [
         status: "active",
     },
     {
+        id: 1,
         debtor: true,
         name: "Aluno 1",
         whatsapp: "11999999999",
@@ -289,6 +311,7 @@ const data = [
         status: "active",
     },
     {
+        id: 1,
         debtor: false,
         name: "Aluno 2",
         whatsapp: "11999999999",
@@ -300,6 +323,7 @@ const data = [
         status: "inactive",
     },
     {
+        id: 1,
         debtor: false,
         name: "Aluno 3",
         whatsapp: "11999999999",
@@ -311,6 +335,7 @@ const data = [
         status: "active",
     },
     {
+        id: 1,
         debtor: true,
         name: "Aluno 1",
         whatsapp: "11999999999",
@@ -322,6 +347,7 @@ const data = [
         status: "active",
     },
     {
+        id: 1,
         debtor: false,
         name: "Aluno 2",
         whatsapp: "11999999999",
@@ -333,6 +359,7 @@ const data = [
         status: "inactive",
     },
     {
+        id: 1,
         debtor: false,
         name: "Aluno 3",
         whatsapp: "11999999999",
@@ -344,6 +371,7 @@ const data = [
         status: "active",
     },
     {
+        id: 1,
         debtor: true,
         name: "Aluno 1",
         whatsapp: "11999999999",
@@ -355,6 +383,7 @@ const data = [
         status: "active",
     },
     {
+        id: 1,
         debtor: false,
         name: "Aluno 2",
         whatsapp: "11999999999",
@@ -366,6 +395,7 @@ const data = [
         status: "inactive",
     },
     {
+        id: 1,
         debtor: false,
         name: "Aluno 3",
         whatsapp: "11999999999",
