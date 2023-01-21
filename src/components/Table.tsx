@@ -48,7 +48,7 @@ const Table: React.FC<TableProps> = ({ columns = [], data = [], actions }) => {
                         return (
                             <tr
                                 {...row.getRowProps()}
-                                className="bg-background border-b border-background-light"
+                                className="bg-transparent border-b border-background-light"
                             >
                                 {row.cells.map((cell) => {
                                     return (
