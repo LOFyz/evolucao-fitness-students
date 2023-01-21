@@ -5,6 +5,7 @@ import { When } from "react-if";
 import * as Yup from "yup";
 import SEO from "../components/SEO";
 import { useAuth } from "../contexts/AuthProvider";
+import backgroundImage from "../images/background3.jpg";
 import AuthLayout from "../layouts/Auth";
 
 type iFormData = {
@@ -39,6 +40,11 @@ const Login: React.FC<PageProps> = (props) => {
     //* render
     return (
         <AuthLayout pageProps={props}>
+            <img
+                src={backgroundImage}
+                alt=""
+                className="absolute opacity-10 h-full w-full saturate-0 object-cover"
+            />
             <form
                 className="w-80 p-5"
                 noValidate
