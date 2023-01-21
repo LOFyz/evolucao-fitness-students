@@ -46,7 +46,7 @@ const Login: React.FC<PageProps> = (props) => {
                 className="absolute opacity-10 h-full w-full saturate-0 object-cover"
             />
             <form
-                className="w-80 p-5"
+                className="w-80 p-5 z-10"
                 noValidate
                 onSubmit={formik.handleSubmit}
             >
