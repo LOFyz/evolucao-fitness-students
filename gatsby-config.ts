@@ -74,6 +74,7 @@ const config: GatsbyConfig = {
         "gatsby-plugin-postcss",
         "gatsby-plugin-offline",
     ],
+    trailingSlash: "never",
 };
 
 export default config;
