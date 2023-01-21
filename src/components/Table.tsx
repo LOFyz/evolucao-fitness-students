@@ -21,9 +21,9 @@ const Table: React.FC<TableProps> = ({ columns = [], data = [], actions }) => {
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg h-full">
             <table
                 {...getTableProps()}
-                className="w-full text-sm text-left text-gray-500 dark:text-gray-400"
+                className="w-full text-sm text-left text-gray-500"
             >
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky top-0">
+                <thead className="text-xs text-text-light uppercase bg-background-light sticky top-0">
                     {headerGroups.map((headerGroup) => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map((column) => (
@@ -48,13 +48,13 @@ const Table: React.FC<TableProps> = ({ columns = [], data = [], actions }) => {
                         return (
                             <tr
                                 {...row.getRowProps()}
-                                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                                className="bg-background border-b border-background-light"
                             >
                                 {row.cells.map((cell) => {
                                     return (
                                         <td
                                             {...cell.getCellProps()}
-                                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                            className="px-6 py-4 font-medium text-text whitespace-nowrap"
                                         >
                                             {cell.render("Cell")}
                                         </td>

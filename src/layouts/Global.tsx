@@ -20,7 +20,7 @@ const GlobalLayout: React.FC<GlobalLayoutProps> = ({ children }) => {
     //* render
     return (
         <AuthProvider>
-            <div id="root" className="overflow-x-hidden">
+            <div id="root" className="overflow-x-hidden bg-background">
                 <script src="../../node_modules/flowbite/dist/flowbite.min.js"></script>
                 {children}
             </div>

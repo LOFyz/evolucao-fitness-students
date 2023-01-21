@@ -13,3 +13,7 @@
     height: 100vh;
     min-height: max-content;
 }
+
+.color-scheme-dark {
+    color-scheme: dark;
+}

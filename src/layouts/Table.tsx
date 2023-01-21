@@ -71,13 +71,15 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                     }`}
                 >
                     <div className="flex gap-4 items-center justify-between">
-                        <h1 className="text-6xl font-bold">{title}</h1>
+                        <h1 className="text-6xl font-bold text-text">
+                            {title}
+                        </h1>
                         <When condition={showAdd}>
                             <button
                                 type="button"
                                 onClick={onClickAdd}
                                 title={addTitle}
-                                className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 p-2 font-medium rounded-full text-2xl text-center h-fit aspect-square"
+                                className="text-text-dark bg-gradient-to-r from-secondary via-primary to-primary hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-primary-light dark:focus:ring-primary-dark p-2 font-medium rounded-full text-2xl text-center h-fit aspect-square"
                             >
                                 <AiFillPlusCircle />
                             </button>
@@ -89,13 +91,13 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                                 type="text"
                                 name="search"
                                 id="search"
-                                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                className="block py-2.5 px-0 w-full text-sm text-text bg-transparent border-0 border-b-2 border-background-light appearance-none dark:text-text-dark dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-primary peer"
                                 placeholder=" "
                                 onChange={onChangeSearch}
                             />
                             <label
                                 htmlFor="search"
-                                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                             >
                                 Pesquisar pelo nome...
                             </label>
@@ -109,7 +111,7 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                             <select
                                 name="orderBy"
                                 id="orderBy"
-                                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                className="block py-2.5 px-0 w-full text-sm text-text bg-transparent border-0 border-b-2 border-background-light appearance-none dark:text-text-dark dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-primary peer"
                                 placeholder=" "
                                 onChange={onChangeOrderBy}
                             >
@@ -123,7 +125,7 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                             </select>
                             <label
                                 htmlFor="orderBy"
-                                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                             >
                                 Ordenar por:
                             </label>
@@ -134,7 +136,7 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                             <select
                                 name="filter"
                                 id="filter"
-                                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                className="block py-2.5 px-0 w-full text-sm text-text bg-transparent border-0 border-b-2 border-background-light appearance-none dark:text-text-dark dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-primary peer"
                                 placeholder=" "
                                 onChange={onChangeFilter}
                             >
@@ -148,7 +150,7 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                             </select>
                             <label
                                 htmlFor="filter"
-                                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                             >
                                 Exibir apenas:
                             </label>
@@ -166,8 +168,8 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                                 pageProps.location.pathname.includes(
                                     "/students"
                                 )
-                                    ? "inline-flex p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group transition-all"
-                                    : "inline-flex p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group transition-all"
+                                    ? "inline-flex p-4 text-primary border-b-2 border-primary rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group transition-all"
+                                    : "inline-flex p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-background-light dark:hover:text-background-light group transition-all"
                             }
                         >
                             <HiUserCircle
@@ -175,8 +177,8 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                                     pageProps.location.pathname.includes(
                                         "/students"
                                     )
-                                        ? " text-blue-600 dark:text-blue-500 transition-all"
-                                        : " text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300 transition-all"
+                                        ? " text-primary dark:text-blue-500 transition-all"
+                                        : " text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-background-light transition-all"
                                 }`}
                             />
                             Alunos
@@ -187,8 +189,8 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                             to="/plans"
                             className={
                                 pageProps.location.pathname.includes("/plans")
-                                    ? "inline-flex p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group transition-all"
-                                    : "inline-flex p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group transition-all"
+                                    ? "inline-flex p-4 text-primary border-b-2 border-primary rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group transition-all"
+                                    : "inline-flex p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-background-light dark:hover:text-background-light group transition-all"
                             }
                         >
                             <MdDashboard
@@ -196,8 +198,8 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                                     pageProps.location.pathname.includes(
                                         "/plans"
                                     )
-                                        ? " text-blue-600 dark:text-blue-500 transition-all"
-                                        : " text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300 transition-all"
+                                        ? " text-primary dark:text-blue-500 transition-all"
+                                        : " text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-background-light transition-all"
                                 }`}
                             />
                             Planos
