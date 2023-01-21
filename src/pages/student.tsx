@@ -77,14 +77,14 @@ const Student: React.FC<PageProps> = (props) => {
                 alt=""
                 className="absolute opacity-5 h-full w-full saturate-0 object-cover"
             />
-            <div className="flex flex-col md:relative w-96 p-5 max-h-full overflow-y-auto">
-                <button
-                    type="submit"
-                    onClick={() => navigate("/students")}
-                    className="text-2xl absolute top-0 left-0 md:translate-x-[-100%] md:translate-y-[-100%] m-4 md:m-0 cursor-pointer p-2 rounded-full text-primary hover:text-text-dark hover:bg-primary transition-colors duration-300 ease-in-out"
-                >
-                    <MdArrowBack />
-                </button>
+            <button
+                type="submit"
+                onClick={() => navigate("/students")}
+                className="text-2xl z-10 absolute top-0 left-0 m-4 cursor-pointer p-2 rounded-full text-primary hover:text-text-dark hover:bg-primary transition-colors duration-300 ease-in-out"
+            >
+                <MdArrowBack />
+            </button>
+            <div className="flex flex-col w-96 p-5 max-h-full overflow-y-auto">
                 <h1 className="mb-2 text-2xl text-primary">
                     Cadastro de Aluno
                 </h1>
