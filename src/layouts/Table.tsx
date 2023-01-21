@@ -59,7 +59,7 @@ const TableLayout: React.FC<TableLayoutProps> = ({
     //* render
     return (
         <div
-            className={`w-full h-full flex mx-auto flex-col p-8 gap-6${
+            className={`w-full h-full flex mx-auto flex-col p-8 gap-6 bg-gradient-to-br from-background to-gray-900${
                 className ? ` ${className}` : ""
             }`}
             {...rest}
