@@ -30,8 +30,10 @@ const validationSchema = Yup.object({
 
 const recurrences: Record<string, string> = {
     monthly: "Mensal",
+    bimonthly: "Bimestral",
     quarterly: "Trimestral",
-    yearly: "Anual",
+    semiannual: "Semestral",
+    annual: "Anual",
 };
 
 const Plan: React.FC<PageProps> = (props) => {
@@ -67,7 +69,7 @@ const Plan: React.FC<PageProps> = (props) => {
             >
                 <MdArrowBack />
             </button>
-            <div className="flex flex-col w-96 p-5 max-h-full overflow-y-auto">
+            <div className="flex flex-col z-10 w-96 p-5 max-h-full overflow-y-auto">
                 <h1 className="mb-2 text-2xl text-primary">
                     Cadastro de Plano
                 </h1>
