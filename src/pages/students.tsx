@@ -49,7 +49,7 @@ const data = [
     {
         debtor: true,
         name: "Aluno 1",
-        whatsapp: "11999999999",
+        whatsapp: "+55 (99) 9.9999-9999",
         lastPayment:
             "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
         createdAt: "Sat Jan 14 2023 00:43:05 GMT-0300 (Brasilia Standard Time)",
@@ -492,7 +492,26 @@ const Students: React.FC<PageProps> = (props) => {
                             ),
                     }))}
                 actions={(row) => [
-                    { text: "Enviar mensagem", onClick: (e) => console.log(e) },
+                    {
+                        text: "Enviar mensagem",
+                        onClick: (e) => {
+                            if (e.original.whatsapp && e.original.name) {
+                                window
+                                    .open(
+                                        `https://api.whatsapp.com/send?phone=${encodeURIComponent(
+                                            (
+                                                e.original.whatsapp as string
+                                            ).replace(/[()+ -.]/g, "")
+                                        )}&text=${encodeURIComponent(
+                                            `Olá,
+                                            ${e.original.name}`
+                                        )}`,
+                                        "_blank"
+                                    )
+                                    ?.focus();
+                            }
+                        },
+                    },
                     {
                         text: "Atualizar pagamento para hoje",
                         onClick: (e) => console.log(e),
