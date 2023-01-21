@@ -25,18 +25,21 @@ const columns = [
 
 const data = [
     {
+        id: 1,
         name: "Plano 1",
         recurrence: "Mensal",
         subscribers: 10,
         value: 100,
     },
     {
+        id: 2,
         name: "Plano 2",
         recurrence: "Trimestral",
         subscribers: 10,
         value: 100,
     },
     {
+        id: 3,
         name: "Plano 3",
         recurrence: "Anual",
         subscribers: 10,
