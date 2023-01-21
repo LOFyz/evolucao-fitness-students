@@ -1,8 +1,8 @@
 import { MdArrowBack } from "@react-icons/all-files/md/MdArrowBack";
 import { useFormik } from "formik";
 import { HeadFC, PageProps, navigate } from "gatsby";
-import React from "react";
-import { When } from "react-if";
+import React, { useEffect, useMemo, useState } from "react";
+import { Else, If, Then, When } from "react-if";
 import * as Yup from "yup";
 import SEO from "../components/SEO";
 import backgroundImage from "../images/background2.jpg";
@@ -42,17 +42,69 @@ const Plan: React.FC<PageProps> = (props) => {
         initialValues,
         validationSchema,
         onSubmit: (values) => {
+            if (!maySubmit) return;
+
+            if (id) {
+                //TODO: update student
+                console.log("updated");
+            } else {
+                //TODO: create student
+                console.log("created");
+            }
             console.log(values);
         },
     });
 
     //* states
+    const [maySubmit, setMaySubmit] = useState(true);
 
     //* constants
+    const id = useMemo(
+        () => props.location.search.replace(/\?id=(.*?)&?/, "$1"),
+        [props.location]
+    );
 
     //* handlers
 
     //* effects
+    useEffect(() => {
+        if (id) {
+            //TODO: fetch plan data and replace mock in the set above to the data
+            formik.setValues({
+                name: "Plano 1",
+                value: 100,
+                recurrence: "monthly",
+            });
+        }
+    }, [id]);
+
+    useEffect(() => {
+        if (id) {
+            //TODO: replace mock with data
+            const _maySubmit =
+                JSON.stringify({
+                    name: formik.values.name,
+                    value: formik.values.value,
+                    recurrence: formik.values.recurrence,
+                }) !==
+                JSON.stringify({
+                    name: "Plano 1",
+                    value: 100,
+                    recurrence: "monthly",
+                });
+
+            if (maySubmit !== _maySubmit) {
+                setMaySubmit(_maySubmit);
+            }
+        } else {
+            const _maySubmit =
+                JSON.stringify(formik.values) !== JSON.stringify(initialValues);
+
+            if (maySubmit !== _maySubmit) {
+                setMaySubmit(_maySubmit);
+            }
+        }
+    }, [formik.values]);
 
     //* render
     return (
@@ -172,9 +224,18 @@ const Plan: React.FC<PageProps> = (props) => {
                     </div>
                     <button
                         type="submit"
-                        className="text-text-dark bg-primary hover:bg-primary-dark focus:ring-4 focus:outline-none focus:ring-primary-light font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary-dark transition-colors duration-300 ease-in-out"
+                        disabled={!maySubmit}
+                        className="text-text-dark bg-primary hover:bg-primary-dark disabled:hover:bg-primary disabled:opacity-70 focus:ring-4 focus:outline-none focus:ring-primary-light font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary-dark transition-colors duration-300 ease-in-out"
                     >
-                        Criar
+                        <If condition={!!id}>
+                            <Then>
+                                <span>Atualizar Plano</span>
+                            </Then>
+
+                            <Else>
+                                <span>Cadastrar Plano</span>
+                            </Else>
+                        </If>
                     </button>
                 </form>
             </div>
