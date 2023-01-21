@@ -97,7 +97,7 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                             />
                             <label
                                 htmlFor="search"
-                                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                                className="peer-focus:font-medium absolute text-sm text-text dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                             >
                                 Pesquisar pelo nome...
                             </label>
@@ -125,7 +125,7 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                             </select>
                             <label
                                 htmlFor="orderBy"
-                                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                                className="peer-focus:font-medium absolute text-sm text-text dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                             >
                                 Ordenar por:
                             </label>
@@ -150,7 +150,7 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                             </select>
                             <label
                                 htmlFor="filter"
-                                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                                className="peer-focus:font-medium absolute text-sm text-text dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                             >
                                 Exibir apenas:
                             </label>
@@ -160,7 +160,7 @@ const TableLayout: React.FC<TableLayoutProps> = ({
             </div>
             {children}
             <div className="border-b border-gray-200 dark:border-gray-700 mt-auto">
-                <ul className="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400 justify-end">
+                <ul className="flex flex-wrap -mb-px text-sm font-medium text-center text-text dark:text-gray-400 justify-end">
                     <li className="mr-2">
                         <Link
                             to="/students"
@@ -178,7 +178,7 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                                         "/students"
                                     )
                                         ? " text-primary dark:text-blue-500 transition-all"
-                                        : " text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-background-light transition-all"
+                                        : " text-gray-400 group-hover:text-text dark:text-text dark:group-hover:text-background-light transition-all"
                                 }`}
                             />
                             Alunos
@@ -199,7 +199,7 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                                         "/plans"
                                     )
                                         ? " text-primary dark:text-blue-500 transition-all"
-                                        : " text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-background-light transition-all"
+                                        : " text-gray-400 group-hover:text-text dark:text-text dark:group-hover:text-background-light transition-all"
                                 }`}
                             />
                             Planos

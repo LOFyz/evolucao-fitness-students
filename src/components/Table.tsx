@@ -21,7 +21,7 @@ const Table: React.FC<TableProps> = ({ columns = [], data = [], actions }) => {
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg h-full">
             <table
                 {...getTableProps()}
-                className="w-full text-sm text-left text-gray-500"
+                className="w-full text-sm text-left text-text"
             >
                 <thead className="text-xs text-text-light uppercase bg-background-light sticky top-0">
                     {headerGroups.map((headerGroup) => (
