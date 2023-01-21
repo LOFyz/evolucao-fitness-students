@@ -5,6 +5,7 @@ import React from "react";
 import { When } from "react-if";
 import * as Yup from "yup";
 import SEO from "../components/SEO";
+import backgroundImage from "../images/background2.jpg";
 import AuthLayout from "../layouts/Auth";
 
 type iFormData = {
@@ -54,6 +55,11 @@ const Plan: React.FC<PageProps> = (props) => {
     //* render
     return (
         <AuthLayout pageProps={props}>
+            <img
+                src={backgroundImage}
+                alt=""
+                className="absolute opacity-10 h-full w-full saturate-0 object-cover"
+            />
             <div className="flex flex-col md:relative w-96 p-5">
                 <button
                     type="submit"
