@@ -136,4 +136,4 @@ const Login: React.FC<PageProps> = (props) => {
 
 export default Login;
 
-export const Head: HeadFC = () => <SEO />;
+export const Head: HeadFC = () => <SEO title="Evolução Fitness" />;

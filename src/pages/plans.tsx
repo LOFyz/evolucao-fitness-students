@@ -86,4 +86,4 @@ const Plans: React.FC<PageProps> = (props) => {
 
 export default Plans;
 
-export const Head: HeadFC = () => <SEO />;
+export const Head: HeadFC = () => <SEO title="Evolução Fitness - Planos" />;

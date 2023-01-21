@@ -263,4 +263,6 @@ const Student: React.FC<PageProps> = (props) => {
 
 export default Student;
 
-export const Head: HeadFC = () => <SEO />;
+export const Head: HeadFC = () => (
+    <SEO title="Evolução Fitness - Cadastrando Aluno" />
+);
