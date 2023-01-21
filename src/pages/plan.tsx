@@ -62,8 +62,10 @@ const Plan: React.FC<PageProps> = (props) => {
                 >
                     <MdArrowBack />
                 </button>
-                <h1 className="mb-2 text-2xl text-text">Cadastro de Plano</h1>
-                <hr className="mb-4 bg-background-light" />
+                <h1 className="mb-2 text-2xl text-primary">
+                    Cadastro de Plano
+                </h1>
+                <hr className="mb-4 border-background-light" />
                 <form noValidate onSubmit={formik.handleSubmit}>
                     <div className="relative z-0 w-full mb-6 group">
                         <input

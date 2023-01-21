@@ -71,7 +71,7 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                     }`}
                 >
                     <div className="flex gap-4 items-center justify-between">
-                        <h1 className="text-6xl font-bold text-text">
+                        <h1 className="text-6xl font-bold text-primary">
                             {title}
                         </h1>
                         <When condition={showAdd}>
@@ -79,7 +79,7 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                                 type="button"
                                 onClick={onClickAdd}
                                 title={addTitle}
-                                className="text-text-dark bg-gradient-to-r from-secondary via-primary to-primary hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-primary-light dark:focus:ring-primary-dark p-2 font-medium rounded-full text-2xl text-center h-fit aspect-square"
+                                className="text-text bg-gradient-to-r from-secondary via-primary to-primary hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-primary-light dark:focus:ring-primary-dark p-2 font-medium rounded-full text-2xl text-center h-fit aspect-square transition-all"
                             >
                                 <AiFillPlusCircle />
                             </button>
@@ -159,7 +159,7 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                 </div>
             </div>
             {children}
-            <div className="border-b border-gray-200 dark:border-gray-700 mt-auto">
+            <div className="border-b border-background-light dark:border-gray-700 mt-auto">
                 <ul className="flex flex-wrap -mb-px text-sm font-medium text-center text-text dark:text-gray-400 justify-end">
                     <li className="mr-2">
                         <Link
@@ -169,7 +169,7 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                                     "/students"
                                 )
                                     ? "inline-flex p-4 text-primary border-b-2 border-primary rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group transition-all"
-                                    : "inline-flex p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-background-light dark:hover:text-background-light group transition-all"
+                                    : "inline-flex p-4 border-b-2 border-transparent rounded-t-lg hover:text-text hover:border-background-light dark:hover:text-background-light group transition-all"
                             }
                         >
                             <HiUserCircle
@@ -190,7 +190,7 @@ const TableLayout: React.FC<TableLayoutProps> = ({
                             className={
                                 pageProps.location.pathname.includes("/plans")
                                     ? "inline-flex p-4 text-primary border-b-2 border-primary rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group transition-all"
-                                    : "inline-flex p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-background-light dark:hover:text-background-light group transition-all"
+                                    : "inline-flex p-4 border-b-2 border-transparent rounded-t-lg hover:text-text hover:border-background-light dark:hover:text-background-light group transition-all"
                             }
                         >
                             <MdDashboard
