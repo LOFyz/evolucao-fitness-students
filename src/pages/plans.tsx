@@ -1,7 +1,7 @@
 import { HeadFC, PageProps, navigate } from "gatsby";
 import React from "react";
 import SEO from "../components/SEO";
-import Table from "../components/Table";
+import Table, { TableActions } from "../components/Table";
 import TableLayout from "../layouts/Table";
 
 const columns = [
@@ -47,8 +47,8 @@ const data = [
     },
 ];
 
-const actions = () => [
-    { text: "Editar", onClick: (e) => console.log(e) },
+const actions: TableActions = () => [
+    { text: "Editar", onClick: (e) => navigate(`/plan?id=${e.original.id}`) },
     { text: "Excluir", onClick: (e) => console.log(e) },
 ];
 
