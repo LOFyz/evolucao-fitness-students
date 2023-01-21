@@ -7,11 +7,13 @@ import { Row, useTable } from "react-table";
 type TableProps = {
     columns: { Header: string; accessor: string }[];
     data?: Record<string, unknown>[];
-    actions?: (row: Row<Record<string, unknown>>) => {
-        text: string;
-        onClick: (row: Row<Record<string, unknown>>) => void;
-    }[];
+    actions?: TableActions;
 };
+
+export type TableActions = (row: Row<Record<string, unknown>>) => {
+    text: string;
+    onClick: (row: Row<Record<string, unknown>>) => void;
+}[];
 
 const Table: React.FC<TableProps> = ({ columns = [], data = [], actions }) => {
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
