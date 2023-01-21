@@ -546,7 +546,11 @@ const Students: React.FC<PageProps> = (props) => {
                         text: "Atualizar pagamento para hoje",
                         onClick: (e) => console.log(e),
                     },
-                    { text: "Editar", onClick: (e) => console.log(e) },
+                    {
+                        text: "Editar",
+                        onClick: (e) =>
+                            navigate(`/student?id=${e.original.id}`),
+                    },
                     {
                         text:
                             row.original.status === "active"
