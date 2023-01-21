@@ -1,7 +1,7 @@
 import { MdArrowBack } from "@react-icons/all-files/md/MdArrowBack";
 import { useFormik } from "formik";
 import { HeadFC, PageProps, navigate } from "gatsby";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { When } from "react-if";
 import * as Yup from "yup";
 import CpfInput from "../components/Form/CpfInput";
@@ -30,13 +30,15 @@ const initialValues: iFormData = {
 
 const validationSchema = Yup.object({
     name: Yup.string().required("O nome do aluno é obrigatório"),
-    cpf: Yup.string().required("O CPF do aluno é obrigatório"),
+    cpf: Yup.string()
+        .required("O CPF do aluno é obrigatório")
+        .min(14, "Insira um CPF valido")
+        .max(14, "Numero do CPF muito longo"),
     whatsapp: Yup.string()
         .required("O WhatsApp do aluno é obrigatório")
         .matches(/[\d()+\s]*/, "Insira apenas números")
         .min(20, "Insira um WhatsApp valido")
         .max(20, "Numero do WhatsApp muito longo"),
-    plan: Yup.string().required("O plano do aluno é obrigatório"),
     lastPayment: Yup.date().required(
         "A data do último pagamento é obrigatória"
     ),
@@ -49,17 +51,78 @@ const Student: React.FC<PageProps> = (props) => {
         initialValues,
         validationSchema,
         onSubmit: (values) => {
+            if (!maySubmit) return;
+
+            if (id) {
+                //TODO: update student
+                console.log("updated");
+            } else {
+                //TODO: create student
+                console.log("created");
+            }
             console.log(values);
         },
     });
 
     //* states
+    const [maySubmit, setMaySubmit] = useState(true);
 
     //* constants
+    const id = useMemo(
+        () => props.location.search.replace(/\?id=(.*?)&?/, "$1"),
+        [props.location]
+    );
 
     //* handlers
 
     //* effects
+    useEffect(() => {
+        if (id) {
+            //TODO: fetch student data and replace mock in the set above to the data
+            formik.setValues({
+                name: "Teste",
+                cpf: "123.456.789-00",
+                whatsapp: "+55 (11) 1.2345-6789",
+                plan: "1",
+                lastPayment: "2021-01-01",
+                paidToday: false,
+            });
+        }
+    }, [id]);
+
+    useEffect(() => {
+        if (id) {
+            const _maySubmit =
+                JSON.stringify({
+                    name: formik.values.name,
+                    cpf: formik.values.cpf,
+                    whatsapp: formik.values.whatsapp,
+                    plan: formik.values.plan,
+                    lastPayment: formik.values.lastPayment,
+                    paidToday: formik.values.paidToday,
+                }) !==
+                JSON.stringify({
+                    name: "Teste",
+                    cpf: "123.456.789-00",
+                    whatsapp: "(11) 12345-6789",
+                    plan: "1",
+                    lastPayment: "2021-01-01",
+                    paidToday: false,
+                });
+
+            if (maySubmit !== _maySubmit) {
+                setMaySubmit(_maySubmit);
+            }
+        } else {
+            const _maySubmit =
+                JSON.stringify(formik.values) !== JSON.stringify(initialValues);
+
+            if (maySubmit !== _maySubmit) {
+                setMaySubmit(_maySubmit);
+            }
+        }
+    }, [formik.values]);
+
     useEffect(() => {
         if (formik.values.paidToday) {
             formik.setFieldValue(
@@ -84,7 +147,7 @@ const Student: React.FC<PageProps> = (props) => {
             >
                 <MdArrowBack />
             </button>
-            <div className="flex flex-col w-96 p-5 max-h-full overflow-y-auto">
+            <div className="flex flex-col z-10 w-96 p-5 max-h-full overflow-y-auto">
                 <h1 className="mb-2 text-2xl text-primary">
                     Cadastro de Aluno
                 </h1>
@@ -263,7 +326,8 @@ const Student: React.FC<PageProps> = (props) => {
                     </div>
                     <button
                         type="submit"
-                        className="text-text-dark bg-primary hover:bg-primary-dark focus:ring-4 focus:outline-none focus:ring-primary-light font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary-dark transition-colors duration-300 ease-in-out"
+                        disabled={!maySubmit}
+                        className="text-text-dark bg-primary hover:bg-primary-dark disabled:hover:bg-primary disabled:opacity-70 focus:ring-4 focus:outline-none focus:ring-primary-light font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary-dark transition-colors duration-300 ease-in-out"
                     >
                         Criar
                     </button>
