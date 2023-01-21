@@ -77,7 +77,7 @@ const Student: React.FC<PageProps> = (props) => {
                 alt=""
                 className="absolute opacity-5 h-full w-full saturate-0 object-cover"
             />
-            <div className="flex flex-col md:relative w-96 p-5">
+            <div className="flex flex-col md:relative w-96 p-5 max-h-full overflow-y-auto">
                 <button
                     type="submit"
                     onClick={() => navigate("/students")}
