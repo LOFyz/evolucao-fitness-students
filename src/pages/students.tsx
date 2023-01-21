@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import { HeadFC, PageProps, navigate } from "gatsby";
 import React from "react";
 import SEO from "../components/SEO";
-import Table from "../components/Table";
+import Table, { TableActions } from "../components/Table";
 import TableLayout from "../layouts/Table";
 
 const filterOptions = {
@@ -408,6 +408,42 @@ const data = [
     },
 ];
 
+const actions: TableActions = (row) => [
+    {
+        text: "Enviar mensagem",
+        onClick: (e) => {
+            if (e.original.whatsapp && e.original.name) {
+                window
+                    .open(
+                        `https://api.whatsapp.com/send?phone=${encodeURIComponent(
+                            (e.original.whatsapp as string).replace(
+                                /[()+ -.]/g,
+                                ""
+                            )
+                        )}&text=${encodeURIComponent(
+                            `Olá,
+                            ${e.original.name}`
+                        )}`,
+                        "_blank"
+                    )
+                    ?.focus();
+            }
+        },
+    },
+    {
+        text: "Atualizar pagamento para hoje",
+        onClick: (e) => console.log(e),
+    },
+    {
+        text: "Editar",
+        onClick: (e) => navigate(`/student?id=${e.original.id}`),
+    },
+    {
+        text: row.original.status === "active" ? "Inativar" : "Ativar",
+        onClick: (e) => console.log(e),
+    },
+];
+
 const Students: React.FC<PageProps> = (props) => {
     //* hooks
     const formik = useFormik({
@@ -521,44 +557,7 @@ const Students: React.FC<PageProps> = (props) => {
                                 </Tooltip>
                             ),
                     }))}
-                actions={(row) => [
-                    {
-                        text: "Enviar mensagem",
-                        onClick: (e) => {
-                            if (e.original.whatsapp && e.original.name) {
-                                window
-                                    .open(
-                                        `https://api.whatsapp.com/send?phone=${encodeURIComponent(
-                                            (
-                                                e.original.whatsapp as string
-                                            ).replace(/[()+ -.]/g, "")
-                                        )}&text=${encodeURIComponent(
-                                            `Olá,
-                                            ${e.original.name}`
-                                        )}`,
-                                        "_blank"
-                                    )
-                                    ?.focus();
-                            }
-                        },
-                    },
-                    {
-                        text: "Atualizar pagamento para hoje",
-                        onClick: (e) => console.log(e),
-                    },
-                    {
-                        text: "Editar",
-                        onClick: (e) =>
-                            navigate(`/student?id=${e.original.id}`),
-                    },
-                    {
-                        text:
-                            row.original.status === "active"
-                                ? "Inativar"
-                                : "Ativar",
-                        onClick: (e) => console.log(e),
-                    },
-                ]}
+                actions={actions}
             />
         </TableLayout>
     );
