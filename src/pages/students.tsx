@@ -421,8 +421,7 @@ const actions: TableActions = (row) => [
                                 ""
                             )
                         )}&text=${encodeURIComponent(
-                            `Olá,
-                            ${e.original.name}`
+                            `Olá, ${e.original.name}`
                         )}`,
                         "_blank"
                     )
