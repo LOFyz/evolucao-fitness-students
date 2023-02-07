@@ -1,7 +1,8 @@
-import { HeadFC, PageProps, navigate } from "gatsby";
+import { HeadFC, navigate, PageProps } from "gatsby";
 import React from "react";
 import SEO from "../components/SEO";
 import Table, { TableActions } from "../components/Table";
+import { useFirestoreList } from "../hooks/useFirestoreList";
 import TableLayout from "../layouts/Table";
 
 const columns = [
@@ -23,30 +24,6 @@ const columns = [
     },
 ];
 
-const data = [
-    {
-        id: 1,
-        name: "Plano 1",
-        recurrence: "Mensal",
-        subscribers: 10,
-        value: 100,
-    },
-    {
-        id: 2,
-        name: "Plano 2",
-        recurrence: "Trimestral",
-        subscribers: 10,
-        value: 100,
-    },
-    {
-        id: 3,
-        name: "Plano 3",
-        recurrence: "Anual",
-        subscribers: 10,
-        value: 100,
-    },
-];
-
 const actions: TableActions = () => [
     { text: "Editar", onClick: (e) => navigate(`/plan?id=${e.original.id}`) },
     { text: "Excluir", onClick: (e) => console.log(e) },
@@ -54,6 +31,7 @@ const actions: TableActions = () => [
 
 const Plans: React.FC<PageProps> = (props) => {
     //* hooks
+    const data = useFirestoreList("plans");
 
     //* states
 
