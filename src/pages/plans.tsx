@@ -30,6 +30,7 @@ const columns = [
 const Plans: React.FC<PageProps> = (props) => {
     //* hooks
     const { data, mutate } = useFirestoreList("plans");
+    const { data: students } = useFirestoreList("students");
 
     //* states
 
@@ -104,6 +105,9 @@ const Plans: React.FC<PageProps> = (props) => {
                 data={data.map((e) => ({
                     ...e,
                     recurrence: recurrences[e?.recurrence],
+                    subscribers: students.filter(
+                        (student) => student.plan === e.id
+                    ).length,
                 }))}
                 actions={actions}
             />
