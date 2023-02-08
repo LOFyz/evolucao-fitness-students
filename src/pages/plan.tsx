@@ -1,12 +1,15 @@
 import { MdArrowBack } from "@react-icons/all-files/md/MdArrowBack";
 import { useFormik } from "formik";
-import { HeadFC, PageProps, navigate } from "gatsby";
+import { HeadFC, navigate, PageProps } from "gatsby";
 import React, { useEffect, useMemo, useState } from "react";
 import { Else, If, Then, When } from "react-if";
 import * as Yup from "yup";
 import SEO from "../components/SEO";
+import { useFirestoreFind } from "../hooks/useFirestoreFind";
 import backgroundImage from "../images/background2.jpg";
 import AuthLayout from "../layouts/Auth";
+import { createFirestoreDoc, updateFirestoreDoc } from "../services/firestore";
+import swal from "../services/swal";
 
 type iFormData = {
     name: string;
@@ -37,7 +40,13 @@ const recurrences: Record<string, string> = {
 };
 
 const Plan: React.FC<PageProps> = (props) => {
+    const id = useMemo(
+        () => props.location.search.replace(/\?id=(.*?)&?/, "$1"),
+        [props.location]
+    );
     //* hooks
+    const data = useFirestoreFind("plans", id);
+
     const formik = useFormik({
         initialValues,
         validationSchema,
@@ -45,13 +54,32 @@ const Plan: React.FC<PageProps> = (props) => {
             if (!maySubmit) return;
 
             if (id) {
-                //TODO: update student
-                console.log("updated");
+                updateFirestoreDoc("plans", id, values);
+
+                swal.fire({
+                    title: "Plano atualizado com sucesso!",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    background: "#4e4e4e",
+                    color: "#fff",
+                }).then(() => {
+                    navigate("/plans");
+                });
             } else {
-                //TODO: create student
-                console.log("created");
+                createFirestoreDoc("plans", values);
+
+                swal.fire({
+                    title: "Plano criado com sucesso!",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    background: "#4e4e4e",
+                    color: "#fff",
+                }).then(() => {
+                    navigate("/plans");
+                });
             }
-            console.log(values);
         },
     });
 
@@ -59,24 +87,15 @@ const Plan: React.FC<PageProps> = (props) => {
     const [maySubmit, setMaySubmit] = useState(true);
 
     //* constants
-    const id = useMemo(
-        () => props.location.search.replace(/\?id=(.*?)&?/, "$1"),
-        [props.location]
-    );
 
     //* handlers
 
     //* effects
     useEffect(() => {
-        if (id) {
-            //TODO: fetch plan data and replace mock in the set above to the data
-            formik.setValues({
-                name: "Plano 1",
-                value: 100,
-                recurrence: "monthly",
-            });
+        if (data) {
+            formik.setValues({ ...formik.values, ...data });
         }
-    }, [id]);
+    }, [data]);
 
     useEffect(() => {
         if (id) {
