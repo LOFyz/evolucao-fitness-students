@@ -63,7 +63,10 @@ const Student: React.FC<PageProps> = (props) => {
             if (!maySubmit) return;
 
             if (id) {
-                updateFirestoreDoc("students", id, values);
+                updateFirestoreDoc("students", id, {
+                    ...values,
+                    updatedAt: new Date(),
+                });
 
                 swal.fire({
                     title: "Aluno atualizado com sucesso!",
@@ -76,7 +79,11 @@ const Student: React.FC<PageProps> = (props) => {
                     navigate("/students");
                 });
             } else {
-                createFirestoreDoc("students", values);
+                createFirestoreDoc("students", {
+                    ...values,
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                });
 
                 swal.fire({
                     title: "Aluno criado com sucesso!",
