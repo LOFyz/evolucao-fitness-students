@@ -41,8 +41,8 @@ const Plans: React.FC<PageProps> = (props) => {
             },
             {
                 text: "Excluir",
-                onClick: (e) => {
-                    deleteFirestoreDoc("plans", e.original.id as string);
+                onClick: async (e) => {
+                    await deleteFirestoreDoc("plans", e.original.id as string);
 
                     mutate();
 
