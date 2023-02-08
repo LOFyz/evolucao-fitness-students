@@ -4,7 +4,7 @@ import { Tooltip } from "flowbite-react";
 import { useFormik } from "formik";
 import { HeadFC, navigate, PageProps } from "gatsby";
 import moment from "moment";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import SEO from "../components/SEO";
 import Table, { TableActions } from "../components/Table";
 import { useFirestoreList } from "../hooks/useFirestoreList";
@@ -80,7 +80,6 @@ const Students: React.FC<PageProps> = (props) => {
 
     const formik = useFormik({
         initialValues: {
-            search: "",
             orderBy: "ascending",
             filter: "all",
         },
@@ -88,6 +87,8 @@ const Students: React.FC<PageProps> = (props) => {
     });
 
     //* states
+    const [search, setSearch] = useState("");
+    const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout>();
 
     //* constants
     const actions: TableActions = useMemo(() => {
@@ -230,9 +231,17 @@ const Students: React.FC<PageProps> = (props) => {
             filterOptions={filterOptions}
             onChangeFilter={formik.handleChange}
             onChangeOrderBy={formik.handleChange}
-            onChangeSearch={formik.handleChange}
+            onChangeSearch={(e) => {
+                if (searchTimeout) clearTimeout(searchTimeout);
+                setSearchTimeout(
+                    setTimeout(() => {
+                        setSearch(e?.target?.value);
+                    }, 500)
+                );
+            }}
         >
             <Table
+                search={search}
                 columns={columns}
                 data={data
                     .filter((e) => {
@@ -258,14 +267,6 @@ const Students: React.FC<PageProps> = (props) => {
                         )
                             return true;
                     })
-                    .filter((e) =>
-                        e.name
-                            .toLowerCase()
-                            .normalize()
-                            .includes(
-                                formik.values.search.toLowerCase().normalize()
-                            )
-                    )
                     .sort((a, b) => {
                         if (formik.values.orderBy === "ascending") {
                             if (a.name < b.name) return -1;

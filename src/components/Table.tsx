@@ -1,13 +1,20 @@
 import { FiMoreVertical } from "@react-icons/all-files/fi/FiMoreVertical";
 import { Dropdown } from "flowbite-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { When } from "react-if";
-import { Row, useTable } from "react-table";
+import {
+    Row,
+    useGlobalFilter,
+    usePagination,
+    useSortBy,
+    useTable,
+} from "react-table";
 
 type TableProps = {
     columns: { Header: string; accessor: string }[];
     data?: Record<string, unknown>[];
     actions?: TableActions;
+    search?: string;
 };
 
 export type TableActions = (row: Row<Record<string, unknown>>) => {
@@ -15,9 +22,38 @@ export type TableActions = (row: Row<Record<string, unknown>>) => {
     onClick: (row: Row<Record<string, unknown>>) => void;
 }[];
 
-const Table: React.FC<TableProps> = ({ columns = [], data = [], actions }) => {
+const Table: React.FC<TableProps> = ({
+    columns = [],
+    data = [],
+    actions,
+    search,
+}) => {
+    const tableInstance = useTable(
+        { columns: columns as any, data },
+        useGlobalFilter,
+        useSortBy,
+        usePagination
+    );
+
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-        useTable({ columns: columns as any, data });
+        tableInstance;
+
+    const {
+        page,
+        previousPage,
+        nextPage,
+        canNextPage,
+        canPreviousPage,
+        pageCount,
+        gotoPage,
+        setPageSize,
+        state,
+        setGlobalFilter,
+    } = tableInstance as any;
+
+    useEffect(() => {
+        setGlobalFilter(search);
+    }, [search]);
 
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg h-full min-h-[15rem]">
