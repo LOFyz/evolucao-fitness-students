@@ -27,7 +27,7 @@ const initialValues: iFormData = {
     name: "",
     cpf: "",
     whatsapp: "",
-    plan: "",
+    plan: "noplan",
     lastPayment: new Date().toISOString().slice(0, 10),
     paidToday: false,
 };
