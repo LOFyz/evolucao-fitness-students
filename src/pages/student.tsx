@@ -8,6 +8,7 @@ import CpfInput from "../components/Form/CpfInput";
 import PhoneInput from "../components/Form/PhoneInput";
 import SEO from "../components/SEO";
 import { useFirestoreFind } from "../hooks/useFirestoreFind";
+import { useFirestoreList } from "../hooks/useFirestoreList";
 import backgroundImage from "../images/background.jpg";
 import AuthLayout from "../layouts/Auth";
 import { createFirestoreDoc, updateFirestoreDoc } from "../services/firestore";
@@ -55,6 +56,7 @@ const Student: React.FC<PageProps> = (props) => {
     );
     //* hooks
     const data = useFirestoreFind("students", id);
+    const { data: plans } = useFirestoreList("plans");
 
     const formik = useFormik({
         initialValues,
@@ -263,12 +265,20 @@ const Student: React.FC<PageProps> = (props) => {
                                 onChange={formik.handleChange}
                             >
                                 <option
-                                    value=""
-                                    disabled
+                                    value="noplan"
                                     className="text-primary bg-background-light"
                                 >
-                                    Selecione um plano
+                                    Sem Plano
                                 </option>
+                                {plans.map((plan) => (
+                                    <option
+                                        key={plan.id}
+                                        value={plan.id}
+                                        className="text-primary bg-background-light"
+                                    >
+                                        {plan.name}
+                                    </option>
+                                ))}
                             </select>
                             <label
                                 htmlFor="plan"
