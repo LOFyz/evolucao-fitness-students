@@ -83,6 +83,8 @@ const Student: React.FC<PageProps> = (props) => {
                     ...values,
                     createdAt: new Date(),
                     updatedAt: new Date(),
+                    debtor: false,
+                    status: "active",
                 });
 
                 swal.fire({
