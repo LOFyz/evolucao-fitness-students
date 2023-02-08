@@ -51,6 +51,7 @@ const columns = [
 const Students: React.FC<PageProps> = (props) => {
     //* hooks
     const { data, mutate } = useFirestoreList("students");
+    const { data: plans } = useFirestoreList("plans");
 
     const formik = useFormik({
         initialValues: {
@@ -246,6 +247,7 @@ const Students: React.FC<PageProps> = (props) => {
                                     <span className="flex w-3 h-3 bg-red-500 rounded-full"></span>
                                 </Tooltip>
                             ),
+                        plan: plans.find((p) => p.id === e.plan)?.name,
                     }))}
                 actions={actions}
             />
