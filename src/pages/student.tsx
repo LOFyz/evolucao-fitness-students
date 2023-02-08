@@ -1,14 +1,17 @@
 import { MdArrowBack } from "@react-icons/all-files/md/MdArrowBack";
 import { useFormik } from "formik";
-import { HeadFC, PageProps, navigate } from "gatsby";
+import { HeadFC, navigate, PageProps } from "gatsby";
 import { default as React, useEffect, useMemo, useState } from "react";
 import { Else, If, Then, When } from "react-if";
 import * as Yup from "yup";
 import CpfInput from "../components/Form/CpfInput";
 import PhoneInput from "../components/Form/PhoneInput";
 import SEO from "../components/SEO";
+import { useFirestoreFind } from "../hooks/useFirestoreFind";
 import backgroundImage from "../images/background.jpg";
 import AuthLayout from "../layouts/Auth";
+import { createFirestoreDoc, updateFirestoreDoc } from "../services/firestore";
+import swal from "../services/swal";
 
 type iFormData = {
     name: string;
@@ -46,7 +49,13 @@ const validationSchema = Yup.object({
 });
 
 const Student: React.FC<PageProps> = (props) => {
+    const id = useMemo(
+        () => props.location.search.replace(/\?id=(.*?)&?/, "$1"),
+        [props.location]
+    );
     //* hooks
+    const data = useFirestoreFind("students", id);
+
     const formik = useFormik({
         initialValues,
         validationSchema,
@@ -54,13 +63,32 @@ const Student: React.FC<PageProps> = (props) => {
             if (!maySubmit) return;
 
             if (id) {
-                //TODO: update student
-                console.log("updated");
+                updateFirestoreDoc("students", id, values);
+
+                swal.fire({
+                    title: "Aluno atualizado com sucesso!",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    background: "#4e4e4e",
+                    color: "#fff",
+                }).then(() => {
+                    navigate("/students");
+                });
             } else {
-                //TODO: create student
-                console.log("created");
+                createFirestoreDoc("students", values);
+
+                swal.fire({
+                    title: "Aluno criado com sucesso!",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    background: "#4e4e4e",
+                    color: "#fff",
+                }).then(() => {
+                    navigate("/students");
+                });
             }
-            console.log(values);
         },
     });
 
@@ -68,31 +96,18 @@ const Student: React.FC<PageProps> = (props) => {
     const [maySubmit, setMaySubmit] = useState(true);
 
     //* constants
-    const id = useMemo(
-        () => props.location.search.replace(/\?id=(.*?)&?/, "$1"),
-        [props.location]
-    );
 
     //* handlers
 
     //* effects
     useEffect(() => {
-        if (id) {
-            //TODO: fetch student data and replace mock in the set above to the data
-            formik.setValues({
-                name: "Teste",
-                cpf: "123.456.789-00",
-                whatsapp: "+55 (11) 1.2345-6789",
-                plan: "1",
-                lastPayment: "2021-01-01",
-                paidToday: false,
-            });
+        if (data) {
+            formik.setValues({ ...formik.values, ...data });
         }
-    }, [id]);
+    }, [data]);
 
     useEffect(() => {
         if (id) {
-            //TODO: replace mock with data
             const _maySubmit =
                 JSON.stringify({
                     name: formik.values.name,
@@ -100,15 +115,13 @@ const Student: React.FC<PageProps> = (props) => {
                     whatsapp: formik.values.whatsapp,
                     plan: formik.values.plan,
                     lastPayment: formik.values.lastPayment,
-                    paidToday: formik.values.paidToday,
                 }) !==
                 JSON.stringify({
-                    name: "Teste",
-                    cpf: "123.456.789-00",
-                    whatsapp: "+55 (11) 1.2345-6789",
-                    plan: "1",
-                    lastPayment: "2021-01-01",
-                    paidToday: false,
+                    name: data?.name,
+                    cpf: data?.cpf,
+                    whatsapp: data?.whatsapp,
+                    plan: data?.plan,
+                    lastPayment: data?.lastPayment,
                 });
 
             if (maySubmit !== _maySubmit) {
