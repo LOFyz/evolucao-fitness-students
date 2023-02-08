@@ -56,6 +56,10 @@ const Table: React.FC<TableProps> = ({
         setGlobalFilter(search);
     }, [search]);
 
+    useEffect(() => {
+        setPageSize(15);
+    }, []);
+
     return (
         <>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg h-full min-h-[15rem]">
