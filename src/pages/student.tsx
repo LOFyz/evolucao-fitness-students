@@ -85,7 +85,6 @@ const Student: React.FC<PageProps> = (props) => {
                     ...values,
                     createdAt: new Date().toISOString().slice(0, 10),
                     updatedAt: new Date().toISOString().slice(0, 10),
-                    debtor: false,
                     status: "active",
                 });
 
