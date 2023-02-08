@@ -3,7 +3,7 @@ import { AiFillCloseCircle } from "@react-icons/all-files/ai/AiFillCloseCircle";
 import { Tooltip } from "flowbite-react";
 import { useFormik } from "formik";
 import { HeadFC, navigate, PageProps } from "gatsby";
-import React from "react";
+import React, { useMemo } from "react";
 import SEO from "../components/SEO";
 import Table, { TableActions } from "../components/Table";
 import { useFirestoreList } from "../hooks/useFirestoreList";
@@ -46,44 +46,9 @@ const columns = [
     },
 ];
 
-const actions: TableActions = (row) => [
-    {
-        text: "Enviar mensagem",
-        onClick: (e) => {
-            if (e.original.whatsapp && e.original.name) {
-                window
-                    .open(
-                        `https://api.whatsapp.com/send?phone=${encodeURIComponent(
-                            (e.original.whatsapp as string).replace(
-                                /[()+ -.]/g,
-                                ""
-                            )
-                        )}&text=${encodeURIComponent(
-                            `Olá, ${e.original.name}`
-                        )}`,
-                        "_blank"
-                    )
-                    ?.focus();
-            }
-        },
-    },
-    {
-        text: "Atualizar pagamento para hoje",
-        onClick: (e) => console.log(e),
-    },
-    {
-        text: "Editar",
-        onClick: (e) => navigate(`/student?id=${e.original.id}`),
-    },
-    {
-        text: row.original.status === "active" ? "Inativar" : "Ativar",
-        onClick: (e) => console.log(e),
-    },
-];
-
 const Students: React.FC<PageProps> = (props) => {
     //* hooks
-    const data = useFirestoreList("students");
+    const { data, mutate } = useFirestoreList("students");
 
     const formik = useFormik({
         initialValues: {
@@ -97,6 +62,42 @@ const Students: React.FC<PageProps> = (props) => {
     //* states
 
     //* constants
+    const actions: TableActions = useMemo(() => {
+        return (row) => [
+            {
+                text: "Enviar mensagem",
+                onClick: (e) => {
+                    if (e.original.whatsapp && e.original.name) {
+                        window
+                            .open(
+                                `https://api.whatsapp.com/send?phone=${encodeURIComponent(
+                                    (e.original.whatsapp as string).replace(
+                                        /[()+ -.]/g,
+                                        ""
+                                    )
+                                )}&text=${encodeURIComponent(
+                                    `Olá, ${e.original.name}`
+                                )}`,
+                                "_blank"
+                            )
+                            ?.focus();
+                    }
+                },
+            },
+            {
+                text: "Atualizar pagamento para hoje",
+                onClick: (e) => console.log(e),
+            },
+            {
+                text: "Editar",
+                onClick: (e) => navigate(`/student?id=${e.original.id}`),
+            },
+            {
+                text: row.original.status === "active" ? "Inativar" : "Ativar",
+                onClick: (e) => console.log(e),
+            },
+        ];
+    }, [mutate]);
 
     //* handlers
 
