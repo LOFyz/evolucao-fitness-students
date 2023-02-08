@@ -19,8 +19,8 @@ const config: GatsbyConfig = {
                 name: `Evolução Fitness Alunos`,
                 short_name: `Alunos`,
                 start_url: `/`,
-                background_color: `#ffffff`,
-                theme_color: `#01534d`,
+                background_color: `#262626`,
+                theme_color: `#f84f0d`,
                 display: `standalone`,
                 icon: `src/images/icon.png`,
                 description: `Eu sou evolução!`,
@@ -41,7 +41,7 @@ const config: GatsbyConfig = {
         {
             resolve: "gatsby-plugin-nprogress",
             options: {
-                color: "#01534d",
+                color: "#f84f0d",
             },
         },
         {
