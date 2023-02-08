@@ -57,7 +57,7 @@ const Plans: React.FC<PageProps> = (props) => {
                 },
             },
         ];
-    }, []);
+    }, [mutate]);
 
     //* handlers
 
