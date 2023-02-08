@@ -8,6 +8,8 @@ import SEO from "../components/SEO";
 import Table, { TableActions } from "../components/Table";
 import { useFirestoreList } from "../hooks/useFirestoreList";
 import TableLayout from "../layouts/Table";
+import { updateFirestoreDoc } from "../services/firestore";
+import swal from "../services/swal";
 
 const filterOptions = {
     all: "Todos",
@@ -86,15 +88,63 @@ const Students: React.FC<PageProps> = (props) => {
             },
             {
                 text: "Atualizar pagamento para hoje",
-                onClick: (e) => console.log(e),
+                onClick: async (e) => {
+                    await updateFirestoreDoc(
+                        "students",
+                        e.original.id as string,
+                        {
+                            updatedAt: new Date(),
+                            lastPayment: new Date(),
+                            paidToday: true,
+                        }
+                    );
+
+                    mutate();
+
+                    swal.fire({
+                        title: "Data de pagamento alterada com sucesso!",
+                        icon: "success",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        background: "#4e4e4e",
+                        color: "#fff",
+                    });
+                },
             },
             {
                 text: "Editar",
                 onClick: (e) => navigate(`/student?id=${e.original.id}`),
             },
             {
-                text: row.original.status === "active" ? "Inativar" : "Ativar",
-                onClick: (e) => console.log(e),
+                text:
+                    (row.original.status as any).props.content === "Aluno Ativo"
+                        ? "Inativar"
+                        : "Ativar",
+                onClick: async (e) => {
+                    await updateFirestoreDoc(
+                        "students",
+                        e.original.id as string,
+                        {
+                            updatedAt: new Date(),
+                            status:
+                                (e.original.status as any).props.content ===
+                                "Aluno Ativo"
+                                    ? "inactive"
+                                    : "active",
+                        }
+                    );
+
+                    mutate();
+
+                    swal.fire({
+                        title: "Status alterado com sucesso!",
+                        icon: "success",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        background: "#4e4e4e",
+                        color: "#fff",
+                    });
+                },
             },
         ];
     }, [mutate]);
