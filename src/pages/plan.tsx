@@ -54,7 +54,10 @@ const Plan: React.FC<PageProps> = (props) => {
             if (!maySubmit) return;
 
             if (id) {
-                updateFirestoreDoc("plans", id, values);
+                updateFirestoreDoc("plans", id, {
+                    ...values,
+                    updatedAt: new Date(),
+                });
 
                 swal.fire({
                     title: "Plano atualizado com sucesso!",
@@ -67,7 +70,12 @@ const Plan: React.FC<PageProps> = (props) => {
                     navigate("/plans");
                 });
             } else {
-                createFirestoreDoc("plans", values);
+                createFirestoreDoc("plans", {
+                    ...values,
+                    subscribers: 0,
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                });
 
                 swal.fire({
                     title: "Plano criado com sucesso!",
