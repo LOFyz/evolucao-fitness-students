@@ -3,6 +3,7 @@ import { AiFillCloseCircle } from "@react-icons/all-files/ai/AiFillCloseCircle";
 import { Tooltip } from "flowbite-react";
 import { useFormik } from "formik";
 import { HeadFC, navigate, PageProps } from "gatsby";
+import moment from "moment";
 import React, { useMemo } from "react";
 import SEO from "../components/SEO";
 import Table, { TableActions } from "../components/Table";
@@ -47,6 +48,30 @@ const columns = [
         accessor: "plan",
     },
 ];
+
+const verifyDebtor = (lastPayment: string, recurrence: string) => {
+    const lastPaymentDate = moment(lastPayment);
+    const today = moment();
+
+    switch (recurrence) {
+        case "monthly":
+            return !lastPaymentDate.add(1, "month").isBefore(today);
+
+        case "bimonthly":
+            return !lastPaymentDate.add(2, "months").isBefore(today);
+
+        case "quarterly":
+            return !lastPaymentDate.add(3, "months").isBefore(today);
+
+        case "semiannual":
+            return !lastPaymentDate.add(6, "months").isBefore(today);
+
+        case "annual":
+            return !lastPaymentDate.add(1, "year").isBefore(today);
+        default:
+            return true;
+    }
+};
 
 const Students: React.FC<PageProps> = (props) => {
     //* hooks
@@ -224,7 +249,10 @@ const Students: React.FC<PageProps> = (props) => {
                     })
                     .map((e) => ({
                         ...e,
-                        debtor: e.debtor ? (
+                        debtor: !verifyDebtor(
+                            e.lastPayment,
+                            plans.find((p) => p.id === e.plan)?.recurrence
+                        ) ? (
                             <div className="flex items-center gap-2 text-red-500">
                                 <AiFillCloseCircle /> Devedor
                             </div>
