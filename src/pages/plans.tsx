@@ -42,17 +42,34 @@ const Plans: React.FC<PageProps> = (props) => {
             {
                 text: "Excluir",
                 onClick: async (e) => {
-                    await deleteFirestoreDoc("plans", e.original.id as string);
-
-                    mutate();
-
                     swal.fire({
-                        title: "Plano removido com sucesso!",
-                        icon: "success",
-                        showConfirmButton: false,
-                        timer: 1500,
+                        title: "Tem certeza?",
+                        text: "Você não poderá reverter isso!",
+                        icon: "warning",
+                        showCancelButton: true,
                         background: "#4e4e4e",
                         color: "#fff",
+                        confirmButtonColor: "#d33",
+                        cancelButtonColor: "#3085d6",
+                        confirmButtonText: "Sim, excluir!",
+                    }).then(async (result) => {
+                        if (result.isConfirmed) {
+                            await deleteFirestoreDoc(
+                                "plans",
+                                e.original.id as string
+                            );
+
+                            mutate();
+
+                            swal.fire({
+                                title: "Plano removido com sucesso!",
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer: 1500,
+                                background: "#4e4e4e",
+                                color: "#fff",
+                            });
+                        }
                     });
                 },
             },

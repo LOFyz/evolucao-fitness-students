@@ -115,25 +115,43 @@ const Students: React.FC<PageProps> = (props) => {
             {
                 text: "Atualizar pagamento para hoje",
                 onClick: async (e) => {
-                    await updateFirestoreDoc(
-                        "students",
-                        e.original.id as string,
-                        {
-                            updatedAt: new Date().toISOString().slice(0, 10),
-                            lastPayment: new Date().toISOString().slice(0, 10),
-                            paidToday: true,
-                        }
-                    );
-
-                    mutate();
-
                     swal.fire({
-                        title: "Data de pagamento alterada com sucesso!",
-                        icon: "success",
-                        showConfirmButton: false,
-                        timer: 1500,
+                        title: "Tem certeza?",
+                        text: "Você não poderá reverter isso!",
+                        icon: "warning",
+                        showCancelButton: true,
                         background: "#4e4e4e",
                         color: "#fff",
+                        confirmButtonColor: "#d33",
+                        cancelButtonColor: "#3085d6",
+                        confirmButtonText: "Sim, continuar!",
+                    }).then(async (result) => {
+                        if (result.isConfirmed) {
+                            await updateFirestoreDoc(
+                                "students",
+                                e.original.id as string,
+                                {
+                                    updatedAt: new Date()
+                                        .toISOString()
+                                        .slice(0, 10),
+                                    lastPayment: new Date()
+                                        .toISOString()
+                                        .slice(0, 10),
+                                    paidToday: true,
+                                }
+                            );
+
+                            mutate();
+
+                            swal.fire({
+                                title: "Data de pagamento alterada com sucesso!",
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer: 1500,
+                                background: "#4e4e4e",
+                                color: "#fff",
+                            });
+                        }
                     });
                 },
             },
@@ -147,28 +165,44 @@ const Students: React.FC<PageProps> = (props) => {
                         ? "Inativar"
                         : "Ativar",
                 onClick: async (e) => {
-                    await updateFirestoreDoc(
-                        "students",
-                        e.original.id as string,
-                        {
-                            updatedAt: new Date().toISOString().slice(0, 10),
-                            status:
-                                (e.original.status as any).props.content ===
-                                "Aluno Ativo"
-                                    ? "inactive"
-                                    : "active",
-                        }
-                    );
-
-                    mutate();
-
                     swal.fire({
-                        title: "Status alterado com sucesso!",
-                        icon: "success",
-                        showConfirmButton: false,
-                        timer: 1500,
+                        title: "Tem certeza?",
+                        text: "Você poderá reverter isso!",
+                        icon: "warning",
+                        showCancelButton: true,
                         background: "#4e4e4e",
                         color: "#fff",
+                        confirmButtonColor: "#d33",
+                        cancelButtonColor: "#3085d6",
+                        confirmButtonText: "Sim, continuar!",
+                    }).then(async (result) => {
+                        if (result.isConfirmed) {
+                            await updateFirestoreDoc(
+                                "students",
+                                e.original.id as string,
+                                {
+                                    updatedAt: new Date()
+                                        .toISOString()
+                                        .slice(0, 10),
+                                    status:
+                                        (e.original.status as any).props
+                                            .content === "Aluno Ativo"
+                                            ? "inactive"
+                                            : "active",
+                                }
+                            );
+
+                            mutate();
+
+                            swal.fire({
+                                title: "Status alterado com sucesso!",
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer: 1500,
+                                background: "#4e4e4e",
+                                color: "#fff",
+                            });
+                        }
                     });
                 },
             },
