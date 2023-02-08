@@ -30,8 +30,7 @@ const validationSchema = Yup.object({
         "O tipo de recorrência do plano é obrigatório"
     ),
 });
-
-const recurrences: Record<string, string> = {
+export const recurrences: Record<string, string> = {
     monthly: "Mensal",
     bimonthly: "Bimestral",
     quarterly: "Trimestral",

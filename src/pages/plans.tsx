@@ -6,6 +6,7 @@ import { useFirestoreList } from "../hooks/useFirestoreList";
 import TableLayout from "../layouts/Table";
 import { deleteFirestoreDoc } from "../services/firestore";
 import swal from "../services/swal";
+import { recurrences } from "./plan";
 
 const columns = [
     {
@@ -98,7 +99,14 @@ const Plans: React.FC<PageProps> = (props) => {
                     );
             }}
         >
-            <Table columns={columns} data={data} actions={actions} />
+            <Table
+                columns={columns}
+                data={data.map((e) => ({
+                    ...e,
+                    recurrence: recurrences[e?.recurrence],
+                }))}
+                actions={actions}
+            />
         </TableLayout>
     );
 };
