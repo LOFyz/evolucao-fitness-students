@@ -107,9 +107,9 @@ const Plan: React.FC<PageProps> = (props) => {
                     recurrence: formik.values.recurrence,
                 }) !==
                 JSON.stringify({
-                    name: "Plano 1",
-                    value: 100,
-                    recurrence: "monthly",
+                    name: data?.name,
+                    value: data?.value,
+                    recurrence: data?.recurrence,
                 });
 
             if (maySubmit !== _maySubmit) {
