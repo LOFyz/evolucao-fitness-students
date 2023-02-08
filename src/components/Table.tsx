@@ -9,6 +9,7 @@ import {
     useSortBy,
     useTable,
 } from "react-table";
+import Indicator from "./Indicator";
 import Pagination from "./Pagination";
 
 type TableProps = {
@@ -72,11 +73,24 @@ const Table: React.FC<TableProps> = ({
                             <tr {...headerGroup.getHeaderGroupProps()}>
                                 {headerGroup.headers.map((column) => (
                                     <th
-                                        {...column.getHeaderProps()}
+                                        {...column.getHeaderProps(
+                                            (
+                                                column as any
+                                            ).getSortByToggleProps()
+                                        )}
                                         className="px-6 py-3"
                                     >
                                         <div className="flex items-center">
                                             {column.render("Header")}
+                                            <Indicator
+                                                className="position-absolute centered-vertical end-0 font-size-12 text-black"
+                                                isSorted={
+                                                    (column as any).isSorted
+                                                }
+                                                isSortedDesc={
+                                                    (column as any).isSortedDesc
+                                                }
+                                            />
                                         </div>
                                     </th>
                                 ))}
