@@ -52,6 +52,7 @@ const Plans: React.FC<PageProps> = (props) => {
                         confirmButtonColor: "#d33",
                         cancelButtonColor: "#3085d6",
                         confirmButtonText: "Sim, excluir!",
+                        cancelButtonText: "Cancelar",
                     }).then(async (result) => {
                         if (result.isConfirmed) {
                             await deleteFirestoreDoc(

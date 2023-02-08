@@ -125,6 +125,7 @@ const Students: React.FC<PageProps> = (props) => {
                         confirmButtonColor: "#d33",
                         cancelButtonColor: "#3085d6",
                         confirmButtonText: "Sim, continuar!",
+                        cancelButtonText: "Cancelar",
                     }).then(async (result) => {
                         if (result.isConfirmed) {
                             await updateFirestoreDoc(
@@ -175,6 +176,7 @@ const Students: React.FC<PageProps> = (props) => {
                         confirmButtonColor: "#d33",
                         cancelButtonColor: "#3085d6",
                         confirmButtonText: "Sim, continuar!",
+                        cancelButtonText: "Cancelar",
                     }).then(async (result) => {
                         if (result.isConfirmed) {
                             await updateFirestoreDoc(
