@@ -6,6 +6,7 @@ const db = getFirestore();
 export const useFirestoreList = (docName: string) => {
     const _collection = useMemo(() => collection(db, docName), [docName, db]);
     const [data, setData] = useState<any[]>([]);
+    const [update, setUpdate] = useState(0);
 
     useEffect(() => {
         getDocs(_collection).then((data) => {
@@ -16,7 +17,7 @@ export const useFirestoreList = (docName: string) => {
                 }))
             );
         });
-    }, [_collection]);
+    }, [_collection, update]);
 
-    return data;
+    return { data: data || [], mutate: () => setUpdate(update + 1) };
 };
