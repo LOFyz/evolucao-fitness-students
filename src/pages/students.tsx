@@ -247,9 +247,15 @@ const Students: React.FC<PageProps> = (props) => {
                             e.status === "inactive"
                         )
                             return true;
-                        if (formik.values.filter === "debtor" && e.debtor)
+                        if (
+                            formik.values.filter === "debtor" &&
+                            !verifyDebtor(e.lastPayment, e?.planRecurrence)
+                        )
                             return true;
-                        if (formik.values.filter === "not-debtor" && !e.debtor)
+                        if (
+                            formik.values.filter === "not-debtor" &&
+                            !!verifyDebtor(e.lastPayment, e?.planRecurrence)
+                        )
                             return true;
                     })
                     .filter((e) =>
@@ -287,7 +293,7 @@ const Students: React.FC<PageProps> = (props) => {
                         ...e,
                         debtor: !verifyDebtor(
                             e.lastPayment,
-                            plans.find((p) => p.id === e.plan)?.recurrence
+                            e?.planRecurrence
                         ) ? (
                             <div className="flex items-center gap-2 text-red-500">
                                 <AiFillCloseCircle /> Devedor
