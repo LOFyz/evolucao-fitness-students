@@ -68,6 +68,9 @@ const Student: React.FC<PageProps> = (props) => {
                 updateFirestoreDoc("students", id, {
                     ...values,
                     updatedAt: new Date().toISOString().slice(0, 10),
+                    planRecurrence: plans?.find(
+                        (plan) => plan.id === values.plan
+                    )?.recurrence,
                 });
 
                 swal.fire({
@@ -86,6 +89,9 @@ const Student: React.FC<PageProps> = (props) => {
                     createdAt: new Date().toISOString().slice(0, 10),
                     updatedAt: new Date().toISOString().slice(0, 10),
                     status: "active",
+                    planRecurrence: plans?.find(
+                        (plan) => plan.id === values.plan
+                    )?.recurrence,
                 });
 
                 swal.fire({
