@@ -9,6 +9,7 @@ import {
     useSortBy,
     useTable,
 } from "react-table";
+import Pagination from "./Pagination";
 
 type TableProps = {
     columns: { Header: string; accessor: string }[];
@@ -81,7 +82,7 @@ const Table: React.FC<TableProps> = ({
                     ))}
                 </thead>
                 <tbody {...getTableBodyProps()}>
-                    {rows.map((row) => {
+                    {page.map((row: Row<Record<string, unknown>>) => {
                         prepareRow(row);
                         return (
                             <tr
@@ -125,6 +126,15 @@ const Table: React.FC<TableProps> = ({
                     })}
                 </tbody>
             </table>
+            <Pagination
+                gotoPage={gotoPage}
+                previousPage={previousPage}
+                nextPage={nextPage}
+                canNextPage={canNextPage}
+                canPreviousPage={canPreviousPage}
+                pageCount={pageCount}
+                pageIndex={state?.pageIndex}
+            />
         </div>
     );
 };
