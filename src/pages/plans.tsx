@@ -1,9 +1,11 @@
 import { HeadFC, navigate, PageProps } from "gatsby";
-import React from "react";
+import React, { useMemo } from "react";
 import SEO from "../components/SEO";
 import Table, { TableActions } from "../components/Table";
 import { useFirestoreList } from "../hooks/useFirestoreList";
 import TableLayout from "../layouts/Table";
+import { deleteFirestoreDoc } from "../services/firestore";
+import swal from "../services/swal";
 
 const columns = [
     {
@@ -24,18 +26,38 @@ const columns = [
     },
 ];
 
-const actions: TableActions = () => [
-    { text: "Editar", onClick: (e) => navigate(`/plan?id=${e.original.id}`) },
-    { text: "Excluir", onClick: (e) => console.log(e) },
-];
-
 const Plans: React.FC<PageProps> = (props) => {
     //* hooks
-    const data = useFirestoreList("plans");
+    const { data, mutate } = useFirestoreList("plans");
 
     //* states
 
     //* constants
+    const actions: TableActions = useMemo(() => {
+        return () => [
+            {
+                text: "Editar",
+                onClick: (e) => navigate(`/plan?id=${e.original.id}`),
+            },
+            {
+                text: "Excluir",
+                onClick: (e) => {
+                    deleteFirestoreDoc("plans", e.original.id as string);
+
+                    mutate();
+
+                    swal.fire({
+                        title: "Plano removido com sucesso!",
+                        icon: "success",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        background: "#4e4e4e",
+                        color: "#fff",
+                    });
+                },
+            },
+        ];
+    }, []);
 
     //* handlers
 
