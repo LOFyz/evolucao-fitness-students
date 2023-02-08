@@ -33,7 +33,7 @@ const Pagination: React.FC<PaginationProps> = ({
     //* render
     return (
         <div>
-            <ul className="justify-end flex gap-2 p-3">
+            <ul className="flex gap-2 mt-4">
                 <li
                     className={
                         canPreviousPage

@@ -57,75 +57,83 @@ const Table: React.FC<TableProps> = ({
     }, [search]);
 
     return (
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg h-full min-h-[15rem]">
-            <table
-                {...getTableProps()}
-                className="w-full text-sm text-left text-text"
-            >
-                <thead className="text-xs text-text-light uppercase bg-background-light sticky top-0">
-                    {headerGroups.map((headerGroup) => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map((column) => (
-                                <th
-                                    {...column.getHeaderProps()}
-                                    className="px-6 py-3"
-                                >
-                                    <div className="flex items-center">
-                                        {column.render("Header")}
-                                    </div>
-                                </th>
-                            ))}
-                            <When condition={!!actions}>
-                                <th className="px-6 py-3"></th>
-                            </When>
-                        </tr>
-                    ))}
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                    {page.map((row: Row<Record<string, unknown>>) => {
-                        prepareRow(row);
-                        return (
-                            <tr
-                                {...row.getRowProps()}
-                                className="bg-transparent border-b border-background-light"
-                            >
-                                {row.cells.map((cell) => {
-                                    return (
-                                        <td
-                                            {...cell.getCellProps()}
-                                            className="px-6 py-4 font-medium text-text whitespace-nowrap"
-                                        >
-                                            {cell.render("Cell")}
-                                        </td>
-                                    );
-                                })}
+        <>
+            <div className="relative overflow-x-auto shadow-md sm:rounded-lg h-full min-h-[15rem]">
+                <table
+                    {...getTableProps()}
+                    className="w-full text-sm text-left text-text"
+                >
+                    <thead className="text-xs text-text-light uppercase bg-background-light sticky top-0">
+                        {headerGroups.map((headerGroup) => (
+                            <tr {...headerGroup.getHeaderGroupProps()}>
+                                {headerGroup.headers.map((column) => (
+                                    <th
+                                        {...column.getHeaderProps()}
+                                        className="px-6 py-3"
+                                    >
+                                        <div className="flex items-center">
+                                            {column.render("Header")}
+                                        </div>
+                                    </th>
+                                ))}
                                 <When condition={!!actions}>
-                                    <td>
-                                        <Dropdown
-                                            label={<FiMoreVertical />}
-                                            arrowIcon={false}
-                                            inline
-                                            className="tooltip"
-                                        >
-                                            {actions &&
-                                                actions(row).map((action) => (
-                                                    <Dropdown.Item
-                                                        key={action.text}
-                                                        onClick={() =>
-                                                            action.onClick(row)
-                                                        }
-                                                    >
-                                                        {action.text}
-                                                    </Dropdown.Item>
-                                                ))}
-                                        </Dropdown>
-                                    </td>
+                                    <th className="px-6 py-3"></th>
                                 </When>
                             </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
+                        ))}
+                    </thead>
+                    <tbody {...getTableBodyProps()}>
+                        {page.map((row: Row<Record<string, unknown>>) => {
+                            prepareRow(row);
+                            return (
+                                <tr
+                                    {...row.getRowProps()}
+                                    className="bg-transparent border-b border-background-light"
+                                >
+                                    {row.cells.map((cell) => {
+                                        return (
+                                            <td
+                                                {...cell.getCellProps()}
+                                                className="px-6 py-4 font-medium text-text whitespace-nowrap"
+                                            >
+                                                {cell.render("Cell")}
+                                            </td>
+                                        );
+                                    })}
+                                    <When condition={!!actions}>
+                                        <td>
+                                            <Dropdown
+                                                label={<FiMoreVertical />}
+                                                arrowIcon={false}
+                                                inline
+                                                className="tooltip"
+                                            >
+                                                {actions &&
+                                                    actions(row).map(
+                                                        (action) => (
+                                                            <Dropdown.Item
+                                                                key={
+                                                                    action.text
+                                                                }
+                                                                onClick={() =>
+                                                                    action.onClick(
+                                                                        row
+                                                                    )
+                                                                }
+                                                            >
+                                                                {action.text}
+                                                            </Dropdown.Item>
+                                                        )
+                                                    )}
+                                            </Dropdown>
+                                        </td>
+                                    </When>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+            </div>
             <Pagination
                 gotoPage={gotoPage}
                 previousPage={previousPage}
@@ -135,7 +143,7 @@ const Table: React.FC<TableProps> = ({
                 pageCount={pageCount}
                 pageIndex={state?.pageIndex}
             />
-        </div>
+        </>
     );
 };
 
