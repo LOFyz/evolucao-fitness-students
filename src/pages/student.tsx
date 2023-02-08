@@ -67,7 +67,7 @@ const Student: React.FC<PageProps> = (props) => {
             if (id) {
                 updateFirestoreDoc("students", id, {
                     ...values,
-                    updatedAt: new Date(),
+                    updatedAt: new Date().toISOString().slice(0, 10),
                 });
 
                 swal.fire({
@@ -83,8 +83,8 @@ const Student: React.FC<PageProps> = (props) => {
             } else {
                 createFirestoreDoc("students", {
                     ...values,
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
+                    createdAt: new Date().toISOString().slice(0, 10),
+                    updatedAt: new Date().toISOString().slice(0, 10),
                     debtor: false,
                     status: "active",
                 });

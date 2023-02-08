@@ -94,8 +94,8 @@ const Students: React.FC<PageProps> = (props) => {
                         "students",
                         e.original.id as string,
                         {
-                            updatedAt: new Date(),
-                            lastPayment: new Date(),
+                            updatedAt: new Date().toISOString().slice(0, 10),
+                            lastPayment: new Date().toISOString().slice(0, 10),
                             paidToday: true,
                         }
                     );
@@ -126,7 +126,7 @@ const Students: React.FC<PageProps> = (props) => {
                         "students",
                         e.original.id as string,
                         {
-                            updatedAt: new Date(),
+                            updatedAt: new Date().toISOString().slice(0, 10),
                             status:
                                 (e.original.status as any).props.content ===
                                 "Aluno Ativo"

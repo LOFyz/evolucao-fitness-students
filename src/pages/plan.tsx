@@ -56,7 +56,7 @@ const Plan: React.FC<PageProps> = (props) => {
             if (id) {
                 updateFirestoreDoc("plans", id, {
                     ...values,
-                    updatedAt: new Date(),
+                    updatedAt: new Date().toISOString().slice(0, 10),
                 });
 
                 swal.fire({
@@ -73,8 +73,8 @@ const Plan: React.FC<PageProps> = (props) => {
                 createFirestoreDoc("plans", {
                     ...values,
                     subscribers: 0,
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
+                    createdAt: new Date().toISOString().slice(0, 10),
+                    updatedAt: new Date().toISOString().slice(0, 10),
                 });
 
                 swal.fire({
